@@ -1,5 +1,5 @@
 <?php 
-require_once './control.php';
+require_once __DIR__ . '/control.php';
 
 $conn = driver .':host='. host .';dbname='. dbname;
 $password = trim(password);

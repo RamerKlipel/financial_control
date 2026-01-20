@@ -1,7 +1,7 @@
 <?php 
-require_once './config.php';
-require_once './funcoes.php';
-require_once './database.php';
+require_once './config/config.php';
+require_once './core/functions.php';
+require_once './core/database.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,8 +10,10 @@ require_once './database.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    <h1>é</h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <?php include_once "./view/navbar.view.php"; ?>
 </body>
 </html>

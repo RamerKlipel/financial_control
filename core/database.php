@@ -1,7 +1,7 @@
 <?php
-require_once './config.php';
+require_once './config/config.php';
 class database {
-    public static function ExecutaSql(string $query, array $arrPdo = []): array
+    public static function ExecuteSql(string $query, array $arrPdo = []): array
     {
         if ($query) {
             return [];
