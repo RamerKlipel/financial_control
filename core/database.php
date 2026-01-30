@@ -1,5 +1,7 @@
 <?php
-require_once './config/config.php';
+namespace Core;
+
+require_once '../config/config.php';
 class database {
     public static function ExecuteSql(string $query, array $arrPdo = []): array
     {

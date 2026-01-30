@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?= __DIR__ . "../index.php" ?>">Dashboard</a>
+                    <a class="nav-link active" aria-current="page" href="index.php">Dashboard</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -18,7 +18,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Categories</a></li>
+                        <li><a class="dropdown-item" href="controller/categories.php">Categories</a></li>
                         <li><a class="dropdown-item" href="#">Credit Card</a></li>
                         <li><a class="dropdown-item" href="#">Users</a></li>
                     </ul>

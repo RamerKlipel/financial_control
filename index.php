@@ -1,7 +1,6 @@
 <?php 
 require_once './config/config.php';
 require_once './core/functions.php';
-require_once './core/database.php';
 ?>
 
 <!DOCTYPE html>
