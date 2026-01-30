@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once __DIR__ . '/control.php';
 
 $conn = driver .':host='. host .';dbname='. dbname;
@@ -8,5 +8,5 @@ $user = trim(user);
 try {
     $stmt = new PDO($conn, $user, $password);
 } catch (PDOException $e) {
-    throw new PDOException ($e->getMessage(), $e->getCode());
+    echo 'erro ao conectar ao banco de dados: ' .$e->getMessage(). ' arquivo: ' .$e->getFile(). ' linha: ' .$e->getLine(). ' Código do erro: ', $e->getCode();die;
 }
