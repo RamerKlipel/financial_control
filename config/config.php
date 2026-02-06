@@ -6,7 +6,7 @@ $password = trim(password);
 $user = trim(user);
 
 try {
-    $stmt = new PDO($conn, $user, $password);
+    // $stmt = new PDO($conn, $user, $password);
 } catch (PDOException $e) {
-    echo 'erro ao conectar ao banco de dados: ' .$e->getMessage(). ' arquivo: ' .$e->getFile(). ' linha: ' .$e->getLine(). ' Código do erro: ', $e->getCode();die;
+    // echo 'erro ao conectar ao banco de dados: ' .$e->getMessage(). ' arquivo: ' .$e->getFile(). ' linha: ' .$e->getLine(). ' Código do erro: ', $e->getCode();die;
 }

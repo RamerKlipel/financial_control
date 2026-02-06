@@ -1,0 +1,13 @@
+{
+    "name": "core/bin",
+    "description": "mantém um controle financeiro para o usuário",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/"
+        }
+    },
+    "require": {
+        "php": "8.5"
+    }
+}

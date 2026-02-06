@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Impede que o Apache tente acessar pastas ou arquivos que realmente existem
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Manda tudo para o index.php
+RewriteRule ^(.*)$ index.php [L,QSA]

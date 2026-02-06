@@ -1,24 +1,30 @@
 <?php
 namespace Core;
 
-require_once '../config/config.php';
+require_once __DIR__. '/../config/config.php';
 class database {
-    public static function ExecuteSql(string $query, array $arrPdo = []): array
+    public static function ExecuteSql(string $sql, array $arrPdo = []): array
     {
-        if ($query) {
+        if (!$sql) {
             return [];
         }
 
-        $exec = $stmt->prepare($query);
+        $exec = $stmt->prepare($sql);
         if (!$exec) {
             return [];
         }
-        
+
         if ($arrPdo) {
             $exec->execute();
         }
-        
+
         $res = $exec->fetchAll();
         return $res ?? [];
+    }
+
+    public static function debugPDO(string $sql, array $arrPdo = []): string
+    {
+        $exec = $stmt->prepare($sql);
+        return $exec;
     }
 }

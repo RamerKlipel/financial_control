@@ -1,13 +1,14 @@
 <?php
-namespace Core;
-require_once '../core/form.php';
+namespace Controllers;
+require_once __DIR__.'/../core/functions.php';
+require_once __DIR__.'/../vendor/autoload.php';
 use Core\form;
-            //  printr(   callViewFrom("form"));die;
 
 class Categories extends form {
     public function __construct()
     {
-             printr(   callViewFrom("form"));die;
-   parent::__construct();
+        parent::__construct('Categories');
     }
 }
+
+new Categories();

@@ -1,11 +1,30 @@
 <?php
 namespace Core;
-require_once '../core/functions.php';
-use Core\database;
+require_once __DIR__.'/../core/functions.php';
+use Core\core;
 
-abstract class form {
-    public function __construct()
+abstract class form extends core{
+    public $nmPage = '';
+    protected $arrInputs = [];
+    public function __construct($nmPage = '')
     {
-   callViewFrom("form");
+        $this->setNmPage($nmPage);
+        $this->callViewFrom("form");
     }
+
+    private function setNmPage(?string $nmPage):void
+    {
+        $this->nmPage = $nmPage ?? '';
+    }
+
+    protected function getNmPage(): string
+    {
+        return $this->nmPage;
+    }
+
+    protected function addInput()
+    {
+
+    }
+
 }
