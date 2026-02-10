@@ -24,7 +24,7 @@ abstract class form extends core{
 
     protected function addInput()
     {
-
+        $this->arrInputs[] = 'input';
     }
 
 }

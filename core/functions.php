@@ -5,3 +5,12 @@ function printr(mixed $mix):void
     print_r($mix);
     echo '</pre>';
 }
+
+function getPagesPermissions(): array
+{
+    return [
+        // 'index', 'bills',
+        'categories', 'index',
+        //  'reports', 'settings',
+    ];
+}

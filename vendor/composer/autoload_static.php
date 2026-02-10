@@ -10,6 +10,7 @@ class ComposerStaticInit1bfed1434d51d2025f7fdd6289a411b0
         'C' =>
         array (
             'Core\\' => 5,
+            'Controllers\\' => 12,
         ),
     );
 
@@ -17,6 +18,10 @@ class ComposerStaticInit1bfed1434d51d2025f7fdd6289a411b0
         'Core\\' =>
         array (
             0 => __DIR__ . '/../..' . '/core',
+        ),
+        'Controllers\\' =>
+        array (
+            0 => __DIR__ . '/../..' . '/controller',
         ),
     );
 
