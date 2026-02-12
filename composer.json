@@ -5,10 +5,11 @@
     "autoload": {
         "psr-4": {
             "Core\\": "core/",
-            "Controllers\\": "controller/"
+            "Controllers\\": "controller/",
+            "Src\\": "src/"
         }
     },
     "require": {
-        "php": "8.5"
+        "php": "^8.5"
     }
 }
