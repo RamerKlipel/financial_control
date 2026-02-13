@@ -1,4 +1,5 @@
 <?php
 namespace Core;
-trait form {
+trait table{
+
 }

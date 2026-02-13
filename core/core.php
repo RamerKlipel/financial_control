@@ -10,9 +10,12 @@ abstract class core {
     public $request = [];
     public $acao = "";
     public $id = null;
+    public $model;
 
     public function __construct() {
+        $model = (explode('=', $_SERVER["QUERY_STRING"])[1] ?? "");
         $this->trataGlobalVariables();
+        $this->setModel($model);
     }
 
     protected function setSql($sql)
@@ -53,5 +56,11 @@ abstract class core {
         unset($_REQUEST);
         unset($_GET);
         unset($_GET);
+    }
+
+    private function setModel($model): void
+    {
+        $model = "./model/".$model."Model.php";
+        $this->model = new $model();
     }
 }
