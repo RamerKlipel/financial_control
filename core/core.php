@@ -13,9 +13,8 @@ abstract class core {
     public $model;
 
     public function __construct() {
-        $model = (explode('=', $_SERVER["QUERY_STRING"])[1] ?? "");
         $this->trataGlobalVariables();
-        $this->setModel($model);
+        $this->setModel($this->get['url']);
     }
 
     protected function setSql($sql)
@@ -58,9 +57,10 @@ abstract class core {
         unset($_GET);
     }
 
-    private function setModel($model): void
+    private function setModel(string $model): void
     {
-        $model = "./model/".$model."Model.php";
+        require_once __DIR__. "/../model/".$model."Model.php";
+        $model = "\model\\".$model."Model";
         $this->model = new $model();
     }
 }

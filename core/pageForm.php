@@ -3,15 +3,20 @@ namespace Core;
 require_once __DIR__.'/../core/functions.php';
 use Core\core;
 use Core\html;
-use Core\form;
 use Core\table;
+use Core\form;
 
 abstract class pageForm extends core{
+    use table;
+    use form;
+
     public $nmPage = '';
     protected $arrInputs = [];
     protected $fieldsSubmit = [];
     protected $viewForm = "form";
     protected $viewTable = "table";
+    protected $form;
+    protected $table;
 
     public function __construct($nmPage = '')
     {
@@ -46,17 +51,22 @@ abstract class pageForm extends core{
         $this->arrInputs[] = html::addTable($idInput, $label, $arrAttrInput);
     }
 
-    public function Form() {}
-    public function Table() {}
+    public function Form() {
+
+    }
+    public function Table() {
+
+    }
 
     public function renderForm()
     {
-        $form = new form();
+        // $this->setArrInputs($this->arrInputs);
+        $this->setArrInputs();
     }
 
     public function renderTable()
     {
-        $table = new table();
+        self::echo2();
     }
 
     public function setViewForm(string $viewForm):void
