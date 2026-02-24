@@ -10,14 +10,19 @@ abstract class core {
     public $request = [];
     public $acao = "";
     public $id = null;
-    public $model;
+    protected $model;
+    protected $sqlTable = "";
+    protected $arrJs = [];
+    protected $arrCss = [];
 
-    public function __construct() {
+
+    public function __construct(string $sqlTable) {
+        $this->setSqlTable($sqlTable);
         $this->trataGlobalVariables();
         $this->setModel($this->get['url']);
     }
 
-    protected function setSql($sql)
+    protected function setSql(string $sql): void
     {
         $this->sql = $sql;
     }
@@ -27,7 +32,7 @@ abstract class core {
         return !empty($this->getArrBinds()) ? database::debugPDO($this->sql, $this->getArrBinds()) : $this->sql;
     }
 
-    protected function setArrBinds($arrBinds)
+    protected function setArrBinds(array $arrBinds): void
     {
         $this->arrBinds = $arrBinds;
     }
@@ -62,5 +67,30 @@ abstract class core {
         require_once __DIR__. "/../model/".$model."Model.php";
         $model = "\model\\".$model."Model";
         $this->model = new $model();
+    }
+
+    protected function setSqlTable(string $strTable): void
+    {
+        $this->sqlTable = $strTable;
+    }
+
+    protected function addJs(string $js): void
+    {
+        $this->arrJs[] = $js;
+    }
+
+    protected function addCss(string $css): void
+    {
+        $this->arrCss[] = $css;
+    }
+
+    protected function getArrJs(): array
+    {
+        return $this->arrJs;
+    }
+
+    protected function getArrCss(): array
+    {
+        return $this->arrCss;
     }
 }

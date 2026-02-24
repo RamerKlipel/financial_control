@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $this->getNmPage() ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-<body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <?php $this->callViewFrom('navbar') ?>
-    <form action="<?= $_SERVER["PHP_SELF"]?>" method="post">
-        <?php if (!empty($this->arrInputs)): ?>
-            <?php foreach($this->arrInputs as $input): ?>
-                <?= $input; ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </form>
-</body>
-</html>
+<?php
+$arrInputs = $this->getArrInputs();
+?>
+<form action="<?= $_SERVER["PHP_SELF"]?>" method="post">
+    <?php if (!empty($arrInputs)): ?>
+        <?php foreach($arrInputs as $input): ?>
+            <?= $input; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</form>

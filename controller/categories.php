@@ -5,7 +5,7 @@ use Core\pageForm;
 class categories extends pageForm {
     public function __construct()
     {
-        parent::__construct('Categories');
+        parent::__construct('Categories', 'categorie');
     }
 
     public function Form(): void

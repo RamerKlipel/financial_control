@@ -13,14 +13,13 @@ abstract class pageForm extends core{
     public $nmPage = '';
     protected $arrInputs = [];
     protected $fieldsSubmit = [];
-    protected $viewForm = "form";
-    protected $viewTable = "table";
-    protected $form;
-    protected $table;
+    protected $nmViewForm = "form";
+    protected $nmViewTable = "table";
+    protected $viewFormContent;
 
-    public function __construct($nmPage = '')
+    public function __construct(string $nmPage, string $sqlTable)
     {
-        parent::__construct();
+        parent::__construct($sqlTable);
         $this->setNmPage($nmPage);
         $this->Form();
         $this->Table();
@@ -58,25 +57,29 @@ abstract class pageForm extends core{
 
     }
 
-    public function renderForm()
-    {
-        // $this->setArrInputs($this->arrInputs);
-        $this->setArrInputs();
-    }
-
-    public function renderTable()
+    public function renderTable()// TODO fazer essa função na trait table
     {
         self::echo2();
     }
 
-    public function setViewForm(string $viewForm):void
+    public function setViewForm(string $nmViewForm):void
     {
-        $this->viewForm = $viewForm;
+        $this->nmViewForm = $nmViewForm;
     }
 
-    public function setViewTable(string $viewTable):void
+    public function setViewTable(string $nmViewTable):void
     {
-        $this->viewTable = $viewTable;
+        $this->nmViewTable = $nmViewTable;
+    }
+
+    public function getViewForm(): string
+    {
+        return $this->nmViewForm;
+    }
+
+    public function getViewTable(): string
+    {
+        return $this->nmViewTable;
     }
 
     public function submit()
@@ -87,5 +90,10 @@ abstract class pageForm extends core{
     public function setFieldsSubmit(array $fieldsSubmit):void
     {
         $this->fieldsSubmit[] = $fieldsSubmit;
+    }
+
+    public function getArrInput():array
+    {
+        return $this->arrInputs;
     }
 }
