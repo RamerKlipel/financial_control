@@ -11,9 +11,11 @@ abstract class core {
     public $acao = "";
     public $id = null;
     protected $model;
+    protected $viewContent;
     protected $sqlTable = "";
     protected $arrJs = [];
     protected $arrCss = [];
+    protected $arrPermCRUD = ["c" => true, "r" => true, "u" => true, "d" => true];
 
 
     public function __construct(string $sqlTable) {
@@ -92,5 +94,20 @@ abstract class core {
     protected function getArrCss(): array
     {
         return $this->arrCss;
+    }
+
+    public function setViewContent(string $viewContent): void
+    {
+        $this->viewContent = $viewContent;
+    }
+
+    public function getViewContent(): ?string
+    {
+        return $this->viewContent;
+    }
+
+    public function getArrPermCrud(): array
+    {
+        return $this->arrPermCRUD;
     }
 }

@@ -10,25 +10,17 @@ class html
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 
 		$abreDiv = '<div id="div'.$idInput.'" class="form-group">';
-		$label = "<label for".$idInput.">$label</label>";
+		$label = "<label for=".$idInput.">$label</label>";
 		$input = "<input type=\"".$type."\" name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput></input>";
 		$divInput = $abreDiv.$label.$input."</div>";
 		return $divInput;
 	}
 
-	public static function addTable(string $name, string $label, array $arrAttrInput = []): string
+	public static function addTable(string $id, array $arrAttrInput = []): string
 	{
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 
-
-
-
-
-
-
-
-
-		return '';
+		return '<td '.$strAttrInput.' id="'.$id.'"> </td>';
 
 
 		/*
@@ -54,5 +46,12 @@ class html
 			}
 		}
 		return $strAttrInput;
+	}
+
+	public static function addButton(string $type, string $id, string $label, array $arrAttrBtn = []): string
+	{
+		$strAttrBtn = self::adjustAttr($arrAttrBtn);
+		$str = "<button $strAttrBtn type='$type' name='$id' id='$id'>$label</button>";
+		return $str;
 	}
 }

@@ -2,6 +2,7 @@
 namespace Core;
 
 trait form {
+    protected $viewFormContent;
     protected $arrInputs = [];
     public function setArrInputs(array $arrInputs): void
     {
@@ -13,7 +14,7 @@ trait form {
         $this->setArrInputs($this->getArrInput());
         ob_start();
             $this->callViewFrom($this->getViewForm());
-        $this->setViewFormContent(ob_get_clean());
+        $this->setViewContent(ob_get_clean());
 
         $this->callViewFrom('index');
     }
@@ -23,13 +24,23 @@ trait form {
         return $this->arrInputs;
     }
 
-    public function setViewFormContent(string $viewFormContent): void
+
+
+    public function Submit()
     {
-        $this->viewFormContent = $viewFormContent;
+        if ($this->acao) {
+            printr([$this->acao,
+            ]);
+        }
     }
 
-    public function getViewFormContent(): string
+    protected function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = []): void
     {
-        return $this->viewFormContent;
+        $this->arrInputs[] = html::addInput($type, $idInput, $label, $arrAttrInput);
+    }
+
+    public function getArrInput():array
+    {
+        return $this->arrInputs;
     }
 }

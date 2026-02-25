@@ -1,8 +1,31 @@
 <?php
 namespace Core;
 trait table{
-    public function echo2()
+    protected $arrTable = [];
+    protected $arrTh = [];
+
+    protected function addTable(string $idInput, string $label = '', array $arrAttrInput = []): void
     {
-        printr("auwdhaowuidhaowidh");
+        $this->arrTh[] = $label;
+        $this->arrTable[$idInput] = html::addTable($idInput, $arrAttrInput);
+    }
+
+    public function getArrTable()
+    {
+        return $this->arrTable;
+    }
+
+    public function getArrTh()
+    {
+        return $this->arrTh;
+    }
+
+    public function renderTable()
+    {
+        ob_start();
+            $this->callViewFrom($this->getViewTable());
+        $this->setViewContent(ob_get_clean());
+
+        $this->callViewFrom('index');
     }
 }

@@ -1,0 +1,21 @@
+.btn-primary {
+    --bs-btn-bg: #6f42c1;        /* Roxo, por exemplo */
+    --bs-btn-border-color: #6f42c1;
+    --bs-btn-hover-bg: #59359a;
+    --bs-btn-hover-border-color: #51318d;
+    --bs-btn-active-bg: #51318d;
+}
+
+.inline-primary-div {
+    padding: 20px;
+}
+
+.inline-primary-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: end;
+    border-width: 2px;
+    border-style: groove;
+    margin-top: 10px;
+    box-shadow: 2px 4px 11px rgb(0 0 0 / 11%);
+}
