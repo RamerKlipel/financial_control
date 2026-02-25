@@ -11,12 +11,9 @@ abstract class pageForm extends core{
     use form;
 
     public $nmPage = '';
-    protected $arrInputs = [];
     protected $fieldsSubmit = [];
     protected $nmViewForm = "form";
     protected $nmViewTable = "table";
-    protected $viewFormContent;
-
     public function __construct(string $nmPage, string $sqlTable)
     {
         parent::__construct($sqlTable);
@@ -40,26 +37,13 @@ abstract class pageForm extends core{
         return $this->nmPage;
     }
 
-    protected function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = []): void
-    {
-        $this->arrInputs[] = html::addInput($type, $idInput, $label, $arrAttrInput);
-    }
 
-    protected function addTable(string $idInput, string $label = '', array $arrAttrInput = []): void
-    {
-        $this->arrInputs[] = html::addTable($idInput, $label, $arrAttrInput);
-    }
 
     public function Form() {
 
     }
     public function Table() {
 
-    }
-
-    public function renderTable()// TODO fazer essa função na trait table
-    {
-        self::echo2();
     }
 
     public function setViewForm(string $nmViewForm):void
@@ -84,16 +68,11 @@ abstract class pageForm extends core{
 
     public function submit()
     {
-
+        printr("arasdawdawd");die;
     }
 
     public function setFieldsSubmit(array $fieldsSubmit):void
     {
         $this->fieldsSubmit[] = $fieldsSubmit;
-    }
-
-    public function getArrInput():array
-    {
-        return $this->arrInputs;
     }
 }
