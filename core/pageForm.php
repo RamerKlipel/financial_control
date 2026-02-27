@@ -20,7 +20,7 @@ abstract class pageForm extends core{
         $this->setNmPage($nmPage);
         $this->Form();
         $this->Table();
-        if (!empty($this->acao)) {
+        if (!empty($this->action)) {
             $this->renderForm();
         } else {
             $this->renderTable();
