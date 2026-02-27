@@ -24,8 +24,6 @@ trait form {
         return $this->arrInputs;
     }
 
-
-
     public function Submit()
     {
         if ($this->action) {
@@ -34,13 +32,18 @@ trait form {
         }
     }
 
-    protected function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = []): void
+    protected function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = [], array $arrAttrDiv = []): void
     {
-        $this->arrInputs[] = html::addInput($type, $idInput, $label, $arrAttrInput);
+        $this->arrInputs[] = html::addInput($type, $idInput, $label, $arrAttrInput, $arrAttrDiv);
     }
 
     public function getArrInput():array
     {
         return $this->arrInputs;
+    }
+
+    public function getWidth($nr): string
+    {
+        return "col-$nr";
     }
 }

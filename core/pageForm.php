@@ -2,7 +2,7 @@
 namespace Core;
 require_once __DIR__.'/../core/functions.php';
 use Core\core;
-use Core\html;
+// use Core\html;
 use Core\table;
 use Core\form;
 

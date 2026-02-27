@@ -9,6 +9,7 @@ $arrPermCRUD = $this->getArrPermCrud();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $this->getNmPage() ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="./public/css/style.css" >
     <?php foreach ($this->getArrCss() as $css): ?>
             <link rel="stylesheet" href="./public/css/<?= $css ?>.css" >
@@ -22,17 +23,18 @@ $arrPermCRUD = $this->getArrPermCrud();
     <?php endforeach; ?>
     <?php include_once "./view/navbar.view.php";?>
     <div class="inline-primary-div">
-
-        <div style="display: flex; justify-content: space-between;">
-            <h1><?= $this->getNmPage() ?></h1>
-        <?php if (($arrPermCRUD['c'] ?? false) && empty($this->action)): ?>
-            <a href="<?= $_SERVER["REDIRECT_URL"].'?action=c'?>" class="btn btn-primary" style="margin-bottom: 10px;" type="button" name="btnCreate" id="btnCreate">Novo Registro</a>
-        <?php endif; ?>
-        <?php if (!empty($this->action)): ?>
-            <a href="<?= $_SERVER["REDIRECT_URL"]?>" class="btn btn-primary" style="margin-bottom: 10px;" type="button" name="btnCreate" id="btnCreate">Voltar</a>
-        <?php endif; ?>
+        <div class="inline-card-div box-shadow" >
+            <div class="inline-title">
+                <h3><?= $this->getNmPage() ?></h3>
+            <?php if (($arrPermCRUD['c'] ?? false) && empty($this->action)): ?>
+                <a href="<?= $this->server["REDIRECT_URL"].'?action=c'?>" class="btn btn-primary" style="margin: 10px 0;" type="button" name="btnCreate" id="btnCreate">Novo Registro</a>
+            <?php endif; ?>
+            <?php if (!empty($this->action)): ?>
+                <a href="<?= $this->server["REDIRECT_URL"]?>" class="btn btn-primary" style="margin: 10px 0;" type="button" name="btnCreate" id="btnCreate">Voltar</a>
+            <?php endif; ?>
+            </div>
+        <?php echo $this->getViewContent();?>
         </div>
-    <?php echo $this->getViewContent();?>
     </div>
 
 </body>
