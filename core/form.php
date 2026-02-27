@@ -28,8 +28,8 @@ trait form {
 
     public function Submit()
     {
-        if ($this->acao) {
-            printr([$this->acao,
+        if ($this->action) {
+            printr([$this->action,
             ]);
         }
     }

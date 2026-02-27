@@ -8,7 +8,7 @@ abstract class core {
     public $get = [];
     public $post = [];
     public $request = [];
-    public $acao = "";
+    public $action = "";
     public $id = null;
     protected $model;
     protected $viewContent;
@@ -54,7 +54,7 @@ abstract class core {
         $this->get = $_GET;
         $this->post = $_POST;
         $this->request = $_REQUEST;
-        $this->acao = $_GET["acao"] ?? "";
+        $this->action = $_GET["action"] ?? "";
         $this->id = $_GET["id"] ?? "";
 
         unset($_GET);

@@ -25,11 +25,11 @@ $arrPermCRUD = $this->getArrPermCrud();
 
         <div style="display: flex; justify-content: space-between;">
             <h1><?= $this->getNmPage() ?></h1>
-        <?php if (($arrPermCRUD['c'] ?? false) && empty($this->acao)): ?>
-            <a href="<?= $_SERVER["REDIRECT_URL"].'?acao=c'?>" class="btn btn-primary" style="margin-bottom: 10px;" type="button" name="btnCria" id="btnCria">Novo Registro</a>
+        <?php if (($arrPermCRUD['c'] ?? false) && empty($this->action)): ?>
+            <a href="<?= $_SERVER["REDIRECT_URL"].'?action=c'?>" class="btn btn-primary" style="margin-bottom: 10px;" type="button" name="btnCreate" id="btnCreate">Novo Registro</a>
         <?php endif; ?>
-        <?php if (!empty($this->acao)): ?>
-            <a href="<?= $_SERVER["REDIRECT_URL"]?>" class="btn btn-primary" style="margin-bottom: 10px;" type="button" name="btnCria" id="btnCria">Voltar</a>
+        <?php if (!empty($this->action)): ?>
+            <a href="<?= $_SERVER["REDIRECT_URL"]?>" class="btn btn-primary" style="margin-bottom: 10px;" type="button" name="btnCreate" id="btnCreate">Voltar</a>
         <?php endif; ?>
         </div>
     <?php echo $this->getViewContent();?>
