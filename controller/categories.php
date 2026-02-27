@@ -10,7 +10,7 @@ class categories extends pageForm {
 
     public function Form(): void
     {
-        $this->addInput('text', 'NMCATEGORIE', 'labelzissima', ['required'=> true, 'class' => 'form-control']);
+        $this->addInput('text', 'NMCATEGORIE', 'Nome', ['required'=> true, 'class' => 'form-control input']);
     }
 
     public function Table(): void
