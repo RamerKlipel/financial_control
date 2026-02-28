@@ -21,8 +21,10 @@ abstract class core {
 
     public function __construct(string $sqlTable) {
         $this->setSqlTable($sqlTable);
-        $this->trataGlobalVariables();
-        $this->setModel($this->get['url']);
+        $this->handleGlobalVariables();
+        $arrUrl = $this->handleUrl($this->get['url']);
+        $class = $arrUrl['CLASS'];
+        $this->setModel($class);
     }
 
     protected function setSql(string $sql): void
@@ -50,7 +52,7 @@ abstract class core {
         include_once __DIR__. "/../view/$path.view.php";
     }
 
-    private function trataGlobalVariables(): void
+    private function handleGlobalVariables(): void
     {
         $this->get = $_GET;
         $this->post = $_POST;
@@ -111,5 +113,21 @@ abstract class core {
     public function getArrPermCrud(): array
     {
         return $this->arrPermCRUD;
+    }
+
+    protected function handleUrl(string $url): array
+    {
+        preg_match("/^([^@?]+)(?:@([^?]+))?/", $url, $match);
+        $arrUrl = [
+            'FULLURL' => ($match[0] ?? ''),
+            'CLASS' => ($match[1] ?? ''),
+            'METHOD' => ($match[2] ?? '')
+        ];
+        return ($arrUrl ?? []);
+    }
+
+    public function submit()
+    {
+
     }
 }

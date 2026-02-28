@@ -1,7 +1,7 @@
 <?php
 $arrInputs = $this->getArrInputs();
 ?>
-<form action="<?= $this->server["REDIRECT_URL"]?>" method="post">
+<form action="<?= $this->server["REDIRECT_URL"]?>@submit" method="post">
     <div class="form-row form-input">
         <?php if (!empty($arrInputs)): ?>
             <?php foreach($arrInputs as $input): ?>
