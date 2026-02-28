@@ -6,14 +6,17 @@ require_once './core/functions.php';
 class index {
     public static function getController()
     {
-        $class = '';
+        $class = $function = '';
+        $params = $_GET;
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $parts = explode('/', trim($url, '/'));
+        $last = $parts[array_key_last($parts)];
 
-        if (!empty($parts) && strpos($parts[count($parts) -1], '.') !== false) {
-            $class = explode('.', $parts[count($parts) -1])[0];
-        } else {
-            $class = $parts[count($parts) -1];
+        if (preg_match('/^([^@?]+)(?:@([^?]+))?/', $last, $matches)) {
+            $class = $matches[1];
+            if (!empty($matches[2] ?? "")) {
+                $function = $matches[2];
+            }
         }
 
         if (!in_array($class, getPagesPermissions())) {
@@ -23,7 +26,11 @@ class index {
         if ($class != 'index') {
             require_once "./controller/$class.php";
             $nmClasse = "Controllers\\".$class;
-            new $nmClasse;
+            $controller = new $nmClasse;
+
+            if (!empty($function) && method_exists($controller, $function)) {
+                call_user_func_array([$controller, $function], array_values($params) ?: []);
+            }
         }
     }
 }
