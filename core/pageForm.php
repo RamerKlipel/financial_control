@@ -17,6 +17,7 @@ abstract class pageForm extends core{
     public function __construct(string $nmPage, string $sqlTable)
     {
         parent::__construct($sqlTable);
+        $this->catchFunction();
         $this->setNmPage($nmPage);
         $this->Form();
         $this->Table();
@@ -36,8 +37,6 @@ abstract class pageForm extends core{
     {
         return $this->nmPage;
     }
-
-
 
     public function Form() {
 
@@ -66,13 +65,20 @@ abstract class pageForm extends core{
         return $this->nmViewTable;
     }
 
-    public function submit()
-    {
-        printr("arasdawdawd");die;
-    }
-
     public function setFieldsSubmit(array $fieldsSubmit):void
     {
         $this->fieldsSubmit[] = $fieldsSubmit;
+    }
+
+    public function catchFunction()
+    {
+        $arrUrl = $this->handleUrl($this->get['url']);
+        if (!empty($arrUrl["METHOD"] ?? [])) {
+            $method = $arrUrl["METHOD"];
+            $method = 'submit';
+            if (method_exists($this, $method)){
+                call_user_func([$this, $method]);
+            }
+        }
     }
 }

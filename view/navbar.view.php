@@ -19,7 +19,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="categories">Categorias</a></li>
+                        <li><a class="dropdown-item" href="categories">Categories</a></li>
                         <li><a class="dropdown-item" href="creditcard">Credit Card</a></li>
                         <li><a class="dropdown-item" href="users">Users</a></li>
                     </ul>

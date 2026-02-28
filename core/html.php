@@ -22,20 +22,6 @@ class html
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 
 		return '<td '.$strAttrInput.' id="'.$id.'"> </td>';
-
-
-		/*
-		<thead> utilizar $label
-			<th>$label</th>
-		</thead>
-		<tbody>// utilizar o $name, $label, $arrAttrInput
-			<tr>
-				<li></li>
-			</tr>
-		</tbody>
-
-		 */
-
 	}
 
 	private static function adjustAttr(array $arrAttr): string

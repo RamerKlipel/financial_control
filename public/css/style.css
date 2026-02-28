@@ -79,6 +79,7 @@ td:last-child {
     flex-wrap: wrap; /* Faz pular linha */
     gap: 20px;
     align-items: end;
+    margin: 15px 0 0 15px;
 }
 
 .input {
