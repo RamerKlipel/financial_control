@@ -6,7 +6,8 @@
         "psr-4": {
             "Core\\": "core/",
             "Controllers\\": "controller/",
-            "Src\\": "src/"
+            "Src\\": "src/",
+            "model\\": "model/"
         }
     },
     "require": {
