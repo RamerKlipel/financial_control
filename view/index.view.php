@@ -18,9 +18,6 @@ $arrPermCRUD = $this->getArrPermCrud();
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <?php foreach ($this->getArrJs() as $js): ?>
-    <!-- <script scr="./public/js/?= $js ?>.js" ></script> -->
-    <?php endforeach; ?>
     <?php include_once "./view/navbar.view.php";?>
     <div class="inline-primary-div">
         <div class="inline-card-div box-shadow" >
@@ -37,5 +34,8 @@ $arrPermCRUD = $this->getArrPermCrud();
         </div>
     </div>
 
+    <?php foreach ($this->getArrJs() as $js): ?>
+        <script src="./public/js/<?= $js ?>.js" ></script>
+    <?php endforeach; ?>
 </body>
 </html>

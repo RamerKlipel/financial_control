@@ -26,9 +26,14 @@ trait form {
 
     public function Submit()
     {
-        if ($this->action) {
-            printr([$this->action,
-            ]);
+        if ($this->request) {
+            $arrBinds = $arrInsere = [];
+            foreach($this->request as $nmCampo => $value) {
+                $nmCampo = strtoupper($nmCampo);
+                $arrBinds[":$nmCampo"] = $value;
+                $arrInsere[$nmCampo] = ":$nmCampo";
+            }
+            Database::insere(); //TODO falta fazer o Database insere agora irmão, provavelmente no model é mio
         }
     }
 
