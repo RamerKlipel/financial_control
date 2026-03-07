@@ -76,7 +76,7 @@ td:last-child {
 
 .form-input {
     display: flex;
-    flex-wrap: wrap; /* Faz pular linha */
+    flex-wrap: wrap;
     gap: 20px;
     align-items: end;
     margin: 15px 0 0 15px;

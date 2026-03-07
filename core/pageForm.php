@@ -2,7 +2,6 @@
 namespace Core;
 require_once __DIR__.'/../core/functions.php';
 use Core\core;
-// use Core\html;
 use Core\table;
 use Core\form;
 
@@ -21,6 +20,7 @@ abstract class pageForm extends core{
         $this->setNmPage($nmPage);
         $this->Form();
         $this->Table();
+        $this->addJs("pageForm");
         if (!empty($this->action)) {
             $this->renderForm();
         } else {
@@ -75,7 +75,6 @@ abstract class pageForm extends core{
         $arrUrl = $this->handleUrl($this->get['url']);
         if (!empty($arrUrl["METHOD"] ?? [])) {
             $method = $arrUrl["METHOD"];
-            $method = 'submit';
             if (method_exists($this, $method)){
                 call_user_func([$this, $method]);
             }

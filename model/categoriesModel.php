@@ -1,6 +1,8 @@
 <?php
 namespace model;
 
-class categoriesModel extends model{
+use model\model;
+class categoriesModel extends model
+{
 
 }
