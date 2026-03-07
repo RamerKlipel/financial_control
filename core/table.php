@@ -3,6 +3,7 @@ namespace Core;
 trait table{
     protected $arrTable = [];
     protected $arrTh = [];
+    protected $arrData = [];
     protected $arrPermIcon = [
         'r' => 'fa-solid fa-magnifying-glass',
         'u' => 'fa-solid fa-pen-to-square',
@@ -27,11 +28,14 @@ trait table{
 
     public function renderTable(): void
     {
-        ob_start();
-            $this->callViewFrom($this->getViewTable());
-        $this->setViewContent(ob_get_clean());
+        if (!empty($this->getArrTable())) {
+            ob_start();
+                $this->callViewFrom($this->getViewTable());
+            $this->setViewContent(ob_get_clean());
+            $this->setArrData();
 
-        $this->callViewFrom('index');
+            $this->callViewFrom('index');
+        }
     }
 
     public function setArrPermIcon($arrPermIcon): void
@@ -42,5 +46,15 @@ trait table{
     public function getArrPermIcon(): array
     {
         return $this->arrPermIcon;
+    }
+
+    public function setArrData(): void
+    {
+        $this->arrData = $this->model->getArrData();
+    }
+
+    public function getArrData(): array
+    {
+        return $this->arrData;
     }
 }

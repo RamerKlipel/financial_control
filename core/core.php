@@ -3,8 +3,6 @@ namespace Core;
 
 use Core\database;
 abstract class core {
-    protected $sql = '';
-    protected $arrBinds = [];
     public $get = [];
     public $post = [];
     public $request = [];
@@ -20,31 +18,32 @@ abstract class core {
 
 
     public function __construct(string $sqlTable) {
-        $this->setSqlTable($sqlTable);
         $this->handleGlobalVariables();
         $arrUrl = $this->handleUrl($this->get['url']);
         $class = $arrUrl['CLASS'];
         $this->setModel($class);
+        $this->setSqlTable($sqlTable);
     }
 
     protected function setSql(string $sql): void
     {
-        $this->sql = $sql;
+        $this->model->setSql($sql);
+        $this->model->getArrData();
     }
 
-    protected function getSql()
+    protected function getSql(): string
     {
-        return !empty($this->getArrBinds()) ? database::debugPDO($this->sql, $this->getArrBinds()) : $this->sql;
+        return $this->model->getSql();
     }
 
-    protected function setArrBinds(array $arrBinds): void
+    protected function setArrPdo(array $arrPdo): void
     {
-        $this->arrBinds = $arrBinds;
+        $this->model->setArrPdo($arrPdo);
     }
 
-    protected function getArrBinds(): array
+    protected function getArrPdo(): array
     {
-        return $this->arrBinds;
+        return $this->model->getArrPdo();
     }
 
     protected function callViewFrom(String $path): void
@@ -56,7 +55,7 @@ abstract class core {
     {
         $this->get = $_GET;
         $this->post = $_POST;
-        $this->request = $_REQUEST;
+        $this->request = array_merge($this->get, $this->post);
         $this->server = $_SERVER;
         $this->action = $_GET["action"] ?? "";
         $this->id = $_GET["id"] ?? "";
@@ -70,14 +69,21 @@ abstract class core {
 
     private function setModel(string $model): void
     {
-        require_once __DIR__. "/../model/".$model."Model.php";
-        $model = "\model\\".$model."Model";
-        $this->model = new $model();
+        if (file_exists(__DIR__."/../model/".$model."Model.php")) {
+            require_once __DIR__. "/../model/".$model."Model.php";
+            $model = "\model\\".$model."Model";
+            $this->model = new $model();
+        }
     }
 
     protected function setSqlTable(string $strTable): void
     {
-        $this->sqlTable = $strTable;
+        $this->model->setSqlTable($strTable);
+    }
+
+    protected function getSqltable(): string
+    {
+        return $this->model->getSqltable();
     }
 
     protected function addJs(string $js): void

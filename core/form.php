@@ -1,5 +1,6 @@
 <?php
 namespace Core;
+use Core\database;
 
 trait form {
     protected $viewFormContent;
@@ -26,14 +27,14 @@ trait form {
 
     public function Submit()
     {
-        if ($this->request) {
-            $arrBinds = $arrInsere = [];
-            foreach($this->request as $nmCampo => $value) {
+        if ($this->post) {
+            $arrPdo = $arrInsert = [];
+            foreach($this->post as $nmCampo => $value) {
                 $nmCampo = strtoupper($nmCampo);
-                $arrBinds[":$nmCampo"] = $value;
-                $arrInsere[$nmCampo] = ":$nmCampo";
+                $arrPdo[":$nmCampo"] = $value;
+                $arrInsert[$nmCampo] = ":$nmCampo";
             }
-            Database::insere(); //TODO falta fazer o Database insere agora irmão, provavelmente no model é mio
+            Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);
         }
     }
 

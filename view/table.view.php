@@ -17,7 +17,7 @@ $arrPermIcon = $this->getArrPermIcon();
         <th></th>
     </thead>
     <tbody>
-        <!-- ?php if (!empty($arrData)): ?> -->
+        <?php if (!empty($this->getArrData())): ?>
             <?php if (!empty($arrTable)): ?>
                 <?php foreach($arrTable as $id => $tdTable): ?>
                     <?= $tdTable; ?>
@@ -32,6 +32,6 @@ $arrPermIcon = $this->getArrPermIcon();
                     <?php endforeach; ?>
                 </div>
             </td>
-        <!-- ?php endif; ?> -->
+        <?php endif; ?>
     </tbody>
 </table>

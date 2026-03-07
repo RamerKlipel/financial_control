@@ -13,7 +13,7 @@ class pageForm {
 
     submit() {
         const formData = new FormData(this.elmtForm);
-        const url = this.elmtForm.getAttribute('action');
+        const url = this.getActionForm();
         fetch(url+'@submit', {
             method: 'post',
             body: formData
@@ -24,6 +24,14 @@ class pageForm {
         .catch(err => {
             if (err) console.log(err);
         })
+    }
+
+    getActionForm() {
+        if (this.elmtForm) {
+            return this.elmtForm.getAttribute('action');
+        } else {
+            return document.querySelector('form').getAttribute('action');
+        }
     }
 }
 
