@@ -89,3 +89,25 @@ td:last-child {
 div.form-group {
     margin-left: 20px
 }
+
+#modalAlert .box-modal-body {
+    display: flex;
+    justify-content: center !important;
+    padding: 15px;
+}
+
+#modalAlert .box-modal-header {
+    display: flex;
+    justify-content: center !important;
+    padding: 15px;
+}
+
+#modalAlert .box-modal-footer {
+    display: flex;
+    justify-content: center !important;
+    padding: 15px;
+}
+
+#modalCancelBtn {
+    margin-right: 10px;
+}

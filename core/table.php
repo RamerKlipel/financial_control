@@ -1,5 +1,7 @@
 <?php
 namespace Core;
+use Exception;
+
 trait table{
     protected $arrTable = [];
     protected $arrTh = [];
@@ -8,6 +10,11 @@ trait table{
         'r' => 'fa-solid fa-magnifying-glass',
         'u' => 'fa-solid fa-pen-to-square',
         'd' => 'fa-solid fa-trash'
+    ];
+    protected $arrPermTitle = [
+        'r' => 'Read',
+        'u' => 'Update',
+        'd' => 'Delete'
     ];
 
     protected function addTable(string $idInput, string $label = '', array $arrAttrInput = []): void
@@ -29,10 +36,11 @@ trait table{
     public function renderTable(): void
     {
         if (!empty($this->getArrTable())) {
+            $this->setArrData();
+            // $this->handleArrTrtable();
             ob_start();
                 $this->callViewFrom($this->getViewTable());
             $this->setViewContent(ob_get_clean());
-            $this->setArrData();
 
             $this->callViewFrom('index');
         }
@@ -56,5 +64,25 @@ trait table{
     public function getArrData(): array
     {
         return $this->arrData;
+    }
+
+    public function getArrPermTitle(): array
+    {
+        return $this->arrPermTitle;
+    }
+
+    public function handleDeleteTable(): ?string
+    {
+        $id = ($this->get['id'] ?? null);
+        if (($this->get['action'] ?? null) == 'd' && $id != null) {
+            $table = $this->getSqlTable();
+            try {
+                Database::delete($table, 'ID'.strtoupper($table).' = :ID', [':ID' => $id]);
+            } catch (Exception $e) {
+                http_response_code($e->getCode());
+                throw new Exception($e->getMessage(), $e->getCode());
+            }
+        }
+        return json_encode($id);
     }
 }

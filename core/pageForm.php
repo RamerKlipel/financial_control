@@ -20,12 +20,7 @@ abstract class pageForm extends core{
         $this->setNmPage($nmPage);
         $this->Form();
         $this->Table();
-        $this->addJs("pageForm");
-        if (!empty($this->action)) {
-            $this->renderForm();
-        } else {
-            $this->renderTable();
-        }
+        $this->addJs("pageForm", ['type'=>"module"]);
     }
 
     private function setNmPage(?string $nmPage):void
@@ -78,6 +73,17 @@ abstract class pageForm extends core{
             if (method_exists($this, $method)){
                 call_user_func([$this, $method]);
             }
+        }
+    }
+
+    public function render(): void
+    {
+        if (in_array($this->action, ['r', 'u', 'c'])) {
+            $this->renderForm();
+        } else if (in_array($this->action, ['d'])) {
+            $this->handleDeleteTable();
+        } else {
+            $this->renderTable();
         }
     }
 }

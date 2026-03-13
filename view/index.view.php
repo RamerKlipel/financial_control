@@ -24,7 +24,7 @@ $arrPermCRUD = $this->getArrPermCrud();
             <div class="inline-title">
                 <h3><?= $this->getNmPage() ?></h3>
             <?php if (($arrPermCRUD['c'] ?? false) && empty($this->action)): ?>
-                <a href="<?= $this->server["REDIRECT_URL"].'?action=c'?>" class="btn btn-primary" style="margin: 10px 0;" type="button" name="btnCreate" id="btnCreate">Novo Registro</a>
+                <a href="<?= $this->server["REDIRECT_URL"]?>?action=c" class="btn btn-primary" style="margin: 10px 0;" type="button" name="btnCreate" title="Create" id="btnCreate">new registration</a>
             <?php endif; ?>
             <?php if (!empty($this->action)): ?>
                 <a href="<?= $this->server["REDIRECT_URL"]?>" class="btn btn-primary" style="margin: 10px 0;" type="button" name="btnCreate" id="btnCreate">Voltar</a>
@@ -35,7 +35,7 @@ $arrPermCRUD = $this->getArrPermCrud();
     </div>
 
     <?php foreach ($this->getArrJs() as $js): ?>
-        <script src="./public/js/<?= $js ?>.js" ></script>
+        <?= $js ?>
     <?php endforeach; ?>
 </body>
 </html>

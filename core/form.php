@@ -40,6 +40,9 @@ trait form {
 
     protected function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = [], array $arrAttrDiv = []): void
     {
+        if ($this->action == "r") {
+            $arrAttrInput['disabled'] = true;
+        }
         $this->arrInputs[] = html::addInput($type, $idInput, $label, $arrAttrInput, $arrAttrDiv);
     }
 

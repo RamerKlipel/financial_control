@@ -73,6 +73,19 @@ class database {
         return $res;
     }
 
+    public static function delete(string $strTable, string $where, array $arrPdo = []): string
+    {
+        if (empty($where)) {
+            http_response_code(500);
+            return "For safety reasons, you shouldn't perform a delete without a where clause";
+        }
+        $sql = "DELETE
+                FROM $strTable
+                WHERE $where";
+        $res = self::ExecuteSql($sql, $arrPdo);
+        return $res;
+    }
+
     public static function extractArrColumnsPdo(array $arrPdo, bool $blReplace = true): array
     {
         if (!empty($arrPdo)) {

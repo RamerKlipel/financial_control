@@ -40,6 +40,8 @@ class index {
             if (!empty($function) && method_exists($controller, $function)) {
                 call_user_func_array([$controller, $function], array_values($params) ?: []);
             }
+
+            $controller->render();
         }
     }
 }
