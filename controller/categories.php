@@ -5,9 +5,9 @@ use Core\pageForm;
 class categories extends pageForm {
     public function __construct()
     {
-        parent::__construct('Categories', 'categories');
+        parent::__construct('Categories', 'categorie');
         $sql = "SELECT *
-                FROM categories";
+                FROM categorie";
         $this->setSql($sql);
     }
 
@@ -18,7 +18,7 @@ class categories extends pageForm {
 
     public function Table(): void
     {
-        $this->addTable('IDCATEGORIE', 'Cod.');
-        $this->addTable('NMCATEGORIE', 'nome');
+        $this->addTable('IDCATEGORIE', 'Code');
+        $this->addTable('NMCATEGORIE', 'name');
     }
 }
