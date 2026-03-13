@@ -5,6 +5,8 @@ $arrTable = $this->getArrTable();
 $arrTh = $this->getArrTh();
 $arrPermCRUD = $this->getArrPermCrud();
 $arrPermIcon = $this->getArrPermIcon();
+$arrPermTitle = $this->getArrPermTitle();
+$arrData = $this->getArrData();
 ?>
 
 <table class="table table-bordered table-hover table-responsive table-striped">
@@ -14,24 +16,28 @@ $arrPermIcon = $this->getArrPermIcon();
             <th> <?= $th ?> </th>
         <?php endforeach; ?>
     <?php endif; ?>
-        <th></th>
+        <th> action </th>
     </thead>
     <tbody>
-        <?php if (!empty($this->getArrData())): ?>
-            <?php if (!empty($arrTable)): ?>
-                <?php foreach($arrTable as $id => $tdTable): ?>
-                    <?= $tdTable; ?>
-                <?php endforeach; ?>
-            <?php endif;?>
-            <td>
-                <div class="btn-group-action">
-                    <?php foreach($arrPermCRUD as $strCRUD => $perm): ?>
-                        <?php if ($perm && $strCRUD != "c"): ?>
-                            <a class="btn-action btn" style="border: #00000045;" href="<?= $this->server["REDIRECT_URL"] ?>?action=<?= $strCRUD ?>"><i class="<?= $arrPermIcon[$strCRUD]?>"></i></a>
+        <?php if (!empty($arrData)): ?>
+            <?php foreach($arrData as $key => $arrTableData): ?>
+                <tr>
+                    <?php foreach($arrTableData as $strColumnName => $arrValueColumnName):?>
+                        <?php if (array_key_exists($strColumnName, $arrTable)): ?>
+                            <td <?= $arrTable[$strColumnName] ?>><?= $arrValueColumnName ?></td>
                         <?php endif;?>
                     <?php endforeach; ?>
-                </div>
-            </td>
+                    <td>
+                        <div class="btn-group-action">
+                            <?php foreach($arrPermCRUD as $strCRUD => $perm): ?>
+                                <?php if ($perm && $strCRUD != "c"): ?>
+                                    <a id="btn<?= $arrPermTitle[$strCRUD] ?>" title="<?= $arrPermTitle[$strCRUD] ?>" class="btn-action btn" style="border: #00000045;" href="<?= $this->server["REDIRECT_URL"] ?>?action=<?= $strCRUD ?>&id=<?= array_first($arrTableData) ?>" data-action="<?= $strCRUD?>"><i class="<?= $arrPermIcon[$strCRUD]?>"></i></a>
+                                <?php endif;?>
+                            <?php endforeach; ?>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         <?php endif; ?>
     </tbody>
 </table>
