@@ -29,10 +29,11 @@ trait table{
     public function renderTable(): void
     {
         if (!empty($this->getArrTable())) {
+            $this->setArrData();
+            // $this->handleArrTrtable();
             ob_start();
                 $this->callViewFrom($this->getViewTable());
             $this->setViewContent(ob_get_clean());
-            $this->setArrData();
 
             $this->callViewFrom('index');
         }
@@ -56,5 +57,25 @@ trait table{
     public function getArrData(): array
     {
         return $this->arrData;
+    }
+
+    public function getArrPermTitle(): array
+    {
+        return $this->arrPermTitle;
+    }
+
+    public function handleDeleteTable(): ?string
+    {
+        $id = ($this->get['id'] ?? null);
+        if (($this->get['action'] ?? null) == 'd' && $id != null) {
+            $table = $this->getSqlTable();
+            try {
+                Database::delete($table, 'ID'.strtoupper($table).' = :ID', [':ID' => $id]);
+            } catch (Exception $e) {
+                http_response_code($e->getCode());
+                throw new Exception($e->getMessage(), $e->getCode());
+            }
+        }
+        return json_encode($id);
     }
 }

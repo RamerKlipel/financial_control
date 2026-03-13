@@ -21,7 +21,7 @@ class html
 	{
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 
-		return '<td '.$strAttrInput.' id="'.$id.'"> </td>';
+		return $strAttrInput." id=\"".$id."\"";
 	}
 
 	private static function adjustAttr(array $arrAttr): string
