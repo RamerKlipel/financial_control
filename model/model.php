@@ -29,7 +29,8 @@ class model {
 
     public function getArrData(): array
     {
-        return database::ExecuteSqlData($this->sql, $this->getArrPdo());
+        $arrDados = database::ExecuteSqlData($this->sql, $this->getArrPdo());
+        return $arrDados;
     }
 
     public function setSqlTable($strTable):void

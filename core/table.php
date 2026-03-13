@@ -1,5 +1,7 @@
 <?php
 namespace Core;
+use Exception;
+
 trait table{
     protected $arrTable = [];
     protected $arrTh = [];
@@ -8,6 +10,11 @@ trait table{
         'r' => 'fa-solid fa-magnifying-glass',
         'u' => 'fa-solid fa-pen-to-square',
         'd' => 'fa-solid fa-trash'
+    ];
+    protected $arrPermTitle = [
+        'r' => 'Read',
+        'u' => 'Update',
+        'd' => 'Delete'
     ];
 
     protected function addTable(string $idInput, string $label = '', array $arrAttrInput = []): void
