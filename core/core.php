@@ -86,9 +86,14 @@ abstract class core {
         return $this->model->getSqltable();
     }
 
-    protected function addJs(string $js): void
+    protected function addJs(string $js, $attrScrpit = []): void
     {
-        $this->arrJs[] = $js;
+        $arrAttrScript = [];
+        foreach($attrScrpit as $key => $val) {
+            $arrAttrScript[] = " $key=\"$val\"";
+        }
+        $this->arrJs[] = "<script ".implode(" ", $arrAttrScript)." src=\"./public/js/$js.js\" ></script>";
+
     }
 
     protected function addCss(string $css): void
