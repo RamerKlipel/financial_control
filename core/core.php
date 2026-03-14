@@ -136,9 +136,4 @@ abstract class core {
         ];
         return ($arrUrl ?? []);
     }
-
-    public function submit()
-    {
-
-    }
 }

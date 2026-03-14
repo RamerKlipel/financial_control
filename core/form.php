@@ -34,7 +34,7 @@ trait form {
                 $arrPdo[":$nmCampo"] = $value;
                 $arrInsert[$nmCampo] = ":$nmCampo";
             }
-            Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);
+            Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);// TODO refatorar para utilizar o model
         }
     }
 
