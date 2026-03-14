@@ -16,7 +16,7 @@ abstract class pageForm extends core{
     public function __construct(string $nmPage, string $sqlTable)
     {
         parent::__construct($sqlTable);
-        $this->catchFunction();
+        // $this->catchFunction();
         $this->setNmPage($nmPage);
         $this->Form();
         $this->Table();
