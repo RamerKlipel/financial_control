@@ -6,7 +6,11 @@ class pageForm {
     }
 
     setBinds() {
-        document.addEventListener('submit', (e) => {
+        this.elmtForm?.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
+
+        document.getElementById('btnSubmit')?.addEventListener('click', (e) => {
             e.preventDefault();
             this.submit();
         });
@@ -31,15 +35,7 @@ class pageForm {
                                 if (!res.ok) {
                                     throw new Error('server error ' + res.status);
                                 }
-                                mountModalAlert({
-                                    'body': 'the item was deleted successfully!',
-                                    'icon': 'success',
-                                    'showCancelBtn' : false,
-                                    'confirmBtnText': 'Ok',
-                                    onConfirm: () => {
-                                        window.location.reload();
-                                    }
-                                })
+                                window.location.reload();
                             })
                             .catch(res => {
                                 console.log(res);
@@ -55,17 +51,14 @@ class pageForm {
                 }
             });
         });
-        // .forEach((btn) => {
-        //     btn.addEventListener('click', (a) => {
-        //         a.preventDefault();
-        //         switch (action) {
-        //             case d
-        //         }
-        //     })
-        // });
     }
 
     submit() {
+        const submitBtn = document.getElementById('btnSubmit');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+        }
+
         const formData = new FormData(this.elmtForm);
         const url = this.getActionForm();
         fetch(url+'@submit', {
@@ -73,11 +66,13 @@ class pageForm {
             body: formData
         })
         .then(res => {
-            this.preventDefault();
             window.location.href = url+'?complete=true';
         })
         .catch(err => {
             if (err) console.log(err);
+            if (submitBtn) {
+                submitBtn.disabled = false;
+            }
         })
     }
 

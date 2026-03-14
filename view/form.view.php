@@ -10,6 +10,6 @@ $arrInputs = $this->getArrInputs();
         <?php endif; ?>
     </div>
     <div class="inline-primary-footer">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="submit" id="btnSubmit" class="btn btn-primary">Salvar</button>
     </div>
 </form>
