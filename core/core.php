@@ -73,6 +73,10 @@ abstract class core {
             require_once __DIR__. "/../model/".$model."Model.php";
             $model = "\model\\".$model."Model";
             $this->model = new $model();
+        } else {
+            require_once __DIR__."/../model/model.php";
+            $model = "\model\\Model";
+            $this->model = new $model();
         }
     }
 
