@@ -60,14 +60,15 @@ class pageForm {
         }
 
         const formData = new FormData(this.elmtForm);
-        const completeUrl = this.getFetchUrl();
+        const url = this.getActionForm();
+        const completeUrl = this.getFetchUrl(url);
 
         fetch(completeUrl, {
             method: 'post',
             body: formData
         })
         .then(res => {
-            // window.location.href = url+'?complete=true';
+            window.location.href = url+'?complete=true';
         })
         .catch(err => {
             if (err) console.log(err);
@@ -85,10 +86,9 @@ class pageForm {
         }
     }
 
-    getFetchUrl() {
+    getFetchUrl(url) {
         const action = this.elmtForm.dataset.action;
         const id = this.elmtForm.dataset.id;
-        const url = this.getActionForm();
         const completeUrl = `${url}@submit?action=${action}&id=${id}`;
 
         return completeUrl;
