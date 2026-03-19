@@ -9,8 +9,8 @@ function printr(mixed $mix):void
 function getPagesPermissions(): array
 {
     return [
-        // 'index', 'bills',
-        'categories', 'index',
+        // 'index',
+        'categories', 'bills', 'index',
         //  'reports', 'settings',
     ];
 }
