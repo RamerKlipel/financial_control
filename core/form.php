@@ -32,28 +32,33 @@ trait form {
 
     public function Submit(): void
     {
-        if ($this->post) {
+        if ($this->post && (!$this->get['complete'] ?? false)) {
             switch ($this->action) {
                 case 'c':
                     $arrPdo = $arrInsert = [];
+
                     foreach($this->post as $nmCampo => $value) {
                         $nmCampo = strtoupper($nmCampo);
                         $arrPdo[":$nmCampo"] = $value;
                         $arrInsert[$nmCampo] = ":$nmCampo";
                     }
+
                     Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);
                     // TODO refatorar para utilizar o model
                 case 'u':
                     $arrPdo = $arrUpdate = [];
                     $nmTable = $this->getSqlTable();
                     $strIdTable = "ID" .strtoupper($nmTable);
+
                     foreach($this->post as $nmCampo => $value) {
                         $nmCampo = strtoupper($nmCampo);
                         $arrPdo[":$nmCampo"] = $value;
                         $arrUpdate[] = "$nmCampo = :$nmCampo";
                     };
+
                     $arrPdo[":$strIdTable"] = $this->id;
                     $where = "$strIdTable = :$strIdTable";
+
                     Database::update($this->getSqlTable(), $arrUpdate, $where, $arrPdo);
             }
         }
