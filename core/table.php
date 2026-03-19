@@ -1,6 +1,5 @@
 <?php
 namespace Core;
-use Exception;
 use Core\database;
 
 trait table{
@@ -18,7 +17,7 @@ trait table{
         'd' => 'Delete'
     ];
 
-    protected function addTable(string $idInput, string $label = '', array $arrAttrInput = []): void
+    protected function addTable(string $idInput, string $label, array $arrAttrInput = []): void
     {
         $this->arrTh[] = $label;
         $this->arrTable[$idInput] = html::addTable($idInput, $arrAttrInput);
@@ -36,15 +35,17 @@ trait table{
 
     public function renderTable(): void
     {
-        if (!empty($this->getArrTable())) {
-            $this->setArrData();
-            // $this->handleArrTrtable();
-            ob_start();
-                $this->callViewFrom($this->getViewTable());
-            $this->setViewContent(ob_get_clean());
-
-            $this->callViewFrom('index');
+        if (empty($this->getArrTable())) {
+            http_response_code(500);
+            throw new \Exception("It's necessary to have at least one column on the function Table");
         }
+        $this->setArrData();
+        // $this->handleArrTrtable();
+        ob_start();
+            $this->callViewFrom($this->getViewTable());
+        $this->setViewContent(ob_get_clean());
+
+        $this->callViewFrom('index');
     }
 
     public function setArrPermIcon($arrPermIcon): void
@@ -79,9 +80,9 @@ trait table{
             $table = $this->getSqlTable();
             try {
                 Database::delete($table, 'ID'.strtoupper($table).' = :ID', [':ID' => $id]);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 http_response_code($e->getCode());
-                throw new Exception($e->getMessage(), $e->getCode());
+                throw new \Exception($e->getMessage(), $e->getCode());
             }
         }
         return json_encode($id);

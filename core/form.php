@@ -12,11 +12,14 @@ trait form {
 
     public function renderForm(): void
     {
+        if (empty($this->getArrInputs())) {
+            http_response_code(500);
+            throw new \Exception("It's necessary to have at least one field on the function Form");
+
+        }
         if (in_array($this->action, ['r', 'u']) && !empty($this->id)) {
             $this->setArrData();
         }
-
-        $this->setArrInputs($this->getArrInput());
 
         ob_start();
             $this->callViewFrom($this->getViewForm());
@@ -76,11 +79,6 @@ trait form {
             'arrAttrInput' => $arrAttrInput,
             'arrAttrDiv' => $arrAttrDiv,
         ];
-    }
-
-    public function getArrInput():array
-    {
-        return $this->arrInputs;
     }
 
     public function getWidth($nr): string
