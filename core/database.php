@@ -101,7 +101,6 @@ class database {
         $sql = "UPDATE $strTable
                 SET $strUpdate
                 WHERE $where";
-                printr(database::debugPDO($sql, $arrPdo));die;
         $res = self::ExecuteSql($sql, $arrPdo);
         return $res;
     }
