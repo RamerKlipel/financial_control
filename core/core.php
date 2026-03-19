@@ -27,8 +27,8 @@ abstract class core {
 
     protected function setSql(string $sql): void
     {
+        $sql = $this->handleSqlVar($sql);
         $this->model->setSql($sql);
-        $this->model->getArrData();
     }
 
     protected function getSql(): string
@@ -135,5 +135,20 @@ abstract class core {
             'METHOD' => ($match[2] ?? '')
         ];
         return ($arrUrl ?? []);
+    }
+
+    public function handleSqlVar($sql): string
+    {
+        if (!empty($this->action) && in_array($this->action, ['r', 'u']) && !empty($this->id)) {
+            $sql = str_replace('{{WHERE}}', "AND ID".strtoupper($this->getSqlTable()). " = $this->id", $sql);
+        } else {
+            $sql = str_replace('{{WHERE}}', "", $sql);
+        }
+        return $sql;
+    }
+
+    public function getDebugSql(): string
+    {
+        return $this->model->getDebugSql();
     }
 }

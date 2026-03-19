@@ -7,7 +7,8 @@ class categories extends pageForm {
     {
         parent::__construct('Categories', 'categorie');
         $sql = "SELECT *
-                FROM categorie";
+                FROM categorie
+                WHERE TRUE {{WHERE}}";
         $this->setSql($sql);
     }
 

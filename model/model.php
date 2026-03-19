@@ -14,6 +14,11 @@ class model {
 
     public function getSql(): string
     {
+        return $this->sql;
+    }
+
+    public function getDebugSql(): string
+    {
         return database::debugPDO($this->sql, $this->getArrPdo());
     }
 

@@ -60,13 +60,14 @@ class pageForm {
         }
 
         const formData = new FormData(this.elmtForm);
-        const url = this.getActionForm();
-        fetch(url+'@submit', {
+        const completeUrl = this.getFetchUrl();
+
+        fetch(completeUrl, {
             method: 'post',
             body: formData
         })
         .then(res => {
-            window.location.href = url+'?complete=true';
+            // window.location.href = url+'?complete=true';
         })
         .catch(err => {
             if (err) console.log(err);
@@ -82,6 +83,15 @@ class pageForm {
         } else {
             return document.querySelector('form').getAttribute('action');
         }
+    }
+
+    getFetchUrl() {
+        const action = this.elmtForm.dataset.action;
+        const id = this.elmtForm.dataset.id;
+        const url = this.getActionForm();
+        const completeUrl = `${url}@submit?action=${action}&id=${id}`;
+
+        return completeUrl;
     }
 }
 

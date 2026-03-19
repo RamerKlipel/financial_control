@@ -5,14 +5,14 @@ class html
 {
 	public function __construct() {}
 
-	public static function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = [], array $arrAttrDiv = [])
+	public static function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = [], array $arrAttrDiv = [], mixed $inputVal = ''): string
 	{
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 		$strAttrDiv = self::adjustAttr($arrAttrDiv);
 
 		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
 		$label = "<label for=".$idInput.">$label</label>";
-		$input = "<input type=\"".$type."\" name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput></input>";
+		$input = "<input type=\"".$type."\" name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput value='$inputVal'></input>";
 		$divInput = $abreDiv.$label.$input."</div>";
 		return $divInput;
 	}

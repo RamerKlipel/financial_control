@@ -52,9 +52,14 @@ class database {
     public static function debugPDO(string $sql, array $arrPdo = []): string
     {
         if ($arrPdo) {
-            foreach($arrPdo as $nmCampo => $val) {
-                $sql = str_replace($nmCampo, $val, $sql);
-            }
+            $arrParamsPdo = array_map(function ($val) {
+                if (is_string($val)) {
+                    $val = "'$val'";
+                }
+                return $val;
+            }, $arrPdo);
+
+            $sql = strtr($sql, $arrParamsPdo);
         }
         return $sql;
     }
@@ -82,6 +87,21 @@ class database {
         $sql = "DELETE
                 FROM $strTable
                 WHERE $where";
+        $res = self::ExecuteSql($sql, $arrPdo);
+        return $res;
+    }
+
+    public static function update(string $strTable, array $arrUpdate, string $where, array $arrPdo = []): string
+    {
+        if (empty($where)) {
+            http_response_code(500);
+            return "For safety reasons, you shouldn't perform a update without a where clause";
+        }
+        $strUpdate = implode(', ', $arrUpdate);
+        $sql = "UPDATE $strTable
+                SET $strUpdate
+                WHERE $where";
+                printr(database::debugPDO($sql, $arrPdo));die;
         $res = self::ExecuteSql($sql, $arrPdo);
         return $res;
     }

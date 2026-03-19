@@ -10,9 +10,14 @@ trait form {
         $this->arrInputs = $arrInputs;
     }
 
-    public function renderForm()
+    public function renderForm(): void
     {
+        if (in_array($this->action, ['r', 'u']) && !empty($this->id)) {
+            $this->setArrData();
+        }
+
         $this->setArrInputs($this->getArrInput());
+
         ob_start();
             $this->callViewFrom($this->getViewForm());
         $this->setViewContent(ob_get_clean());
@@ -20,21 +25,37 @@ trait form {
         $this->callViewFrom('index');
     }
 
-    public function getArrInputs()
+    public function getArrInputs(): array
     {
         return $this->arrInputs;
     }
 
-    public function Submit()
+    public function Submit(): void
     {
         if ($this->post) {
-            $arrPdo = $arrInsert = [];
-            foreach($this->post as $nmCampo => $value) {
-                $nmCampo = strtoupper($nmCampo);
-                $arrPdo[":$nmCampo"] = $value;
-                $arrInsert[$nmCampo] = ":$nmCampo";
+            switch ($this->action) {
+                case 'c':
+                    $arrPdo = $arrInsert = [];
+                    foreach($this->post as $nmCampo => $value) {
+                        $nmCampo = strtoupper($nmCampo);
+                        $arrPdo[":$nmCampo"] = $value;
+                        $arrInsert[$nmCampo] = ":$nmCampo";
+                    }
+                    Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);
+                    // TODO refatorar para utilizar o model
+                case 'u':
+                    $arrPdo = $arrUpdate = [];
+                    $nmTable = $this->getSqlTable();
+                    $strIdTable = "ID" .strtoupper($nmTable);
+                    foreach($this->post as $nmCampo => $value) {
+                        $nmCampo = strtoupper($nmCampo);
+                        $arrPdo[":$nmCampo"] = $value;
+                        $arrUpdate[] = "$nmCampo = :$nmCampo";
+                    };
+                    $arrPdo[":$strIdTable"] = $this->id;
+                    $where = "$strIdTable = :$strIdTable";
+                    Database::update($this->getSqlTable(), $arrUpdate, $where, $arrPdo);
             }
-            Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);// TODO refatorar para utilizar o model
         }
     }
 
@@ -43,7 +64,13 @@ trait form {
         if ($this->action == "r") {
             $arrAttrInput['disabled'] = true;
         }
-        $this->arrInputs[] = html::addInput($type, $idInput, $label, $arrAttrInput, $arrAttrDiv);
+        $this->arrInputs[] = [
+            'type' => $type,
+            'idInput' => $idInput,
+            'label' => $label,
+            'arrAttrInput' => $arrAttrInput,
+            'arrAttrDiv' => $arrAttrDiv,
+        ];
     }
 
     public function getArrInput():array
