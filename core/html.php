@@ -48,4 +48,26 @@ class html
 		$str = "<button $strAttrBtn type='$type' name='$id' id='$id'>$label</button>";
 		return $str;
 	}
+
+	public static function addSelect(string $idInput, string $label = '', array $arrSelectOptions = [], array $arrAttrInput = [], array $arrAttrDiv = [], mixed $inputVal = ''):string
+	{
+		$strAttrInput = self::adjustAttr($arrAttrInput);
+		$strAttrDiv = self::adjustAttr($arrAttrDiv);
+		$strSelectOptions = self::handleSelectOptions($arrSelectOptions);
+
+		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
+		$label = "<label for=".$idInput.">$label</label>";
+		$select = "<select name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput value='$inputVal'>$strSelectOptions</select>";
+		$divSelect = $abreDiv.$label.$select."</div>";
+		return $divSelect;
+	}
+
+	private static function handleSelectOptions($arrSelectOptions): string
+	{
+		$strOptions = ["<option selected>Selecione:</option>"];
+		foreach($arrSelectOptions as $arrOption) {
+			$strOptions[] = "<option value=".$arrOption["IDCATEGORIE"].">".$arrOption["NMCATEGORIE"]."</option>";
+		}
+		return implode('', $strOptions);
+	}
 }
