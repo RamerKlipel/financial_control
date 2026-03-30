@@ -73,9 +73,25 @@ trait form {
             $arrAttrInput['disabled'] = true;
         }
         $this->arrInputs[] = [
+            'typeInput' => 'input',
             'type' => $type,
             'idInput' => $idInput,
             'label' => $label,
+            'arrAttrInput' => $arrAttrInput,
+            'arrAttrDiv' => $arrAttrDiv,
+        ];
+    }
+
+    protected function addSelect(string $idInput, string $label = '', array $arrSelectOptions, array $arrAttrInput = [], array $arrAttrDiv = []): void
+    {
+        if ($this->action == "r") {
+            $arrAttrInput['disabled'] = true;
+        }
+        $this->arrInputs[] = [
+            'typeInput' => 'select',
+            'idInput' => $idInput,
+            'label' => $label,
+            'arrSelectOptions' => $arrSelectOptions,
             'arrAttrInput' => $arrAttrInput,
             'arrAttrDiv' => $arrAttrDiv,
         ];

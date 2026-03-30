@@ -7,14 +7,24 @@ $arrData = !empty($this->getArrData()) ? $this->getArrData()[0] : [];
     <div class="form-row form-input">
         <?php if (!empty($arrInputs)): ?>
             <?php foreach($arrInputs as $input): ?>
-                <?php $inputVal = ''; ?>
-                <?php extract($input); ?>
+                <?php
+                $inputVal = '';
+                extract($input);
 
-                <?php if (key_exists($idInput, $arrData)): ?>
-                    <?php $inputVal = $arrData[$idInput];?>
-                <?php endif; ?>
+                if (key_exists($idInput, $arrData)) {
+                    $inputVal = $arrData[$idInput];
+                }
 
-                <?= html::addInput($type, $idInput, $label, $arrAttrInput, $arrAttrDiv, $inputVal); ?>
+                switch($typeInput){
+                    case 'input':
+                        echo html::addInput($type, $idInput, $label, $arrAttrInput, $arrAttrDiv, $inputVal);
+                    break;
+                    case 'select':
+                        echo html::addSelect($idInput, $label, $arrSelectOptions, $arrAttrInput, $arrAttrDiv, $inputVal);
+                    break;
+                }
+                ?>
+
 
             <?php endforeach; ?>
         <?php endif; ?>

@@ -1,11 +1,14 @@
 <?php
 namespace Controllers;
-use Core\pageForm;
 
-class index extends pageForm {
+use Core\core;
+
+class index extends core {
     public function __construct()
     {
-        parent::__construct('Home', 'home');
+        parent::__construct('Home');
         callViewFrom("emptyindex");
     }
+
+    public function render() {}
 }

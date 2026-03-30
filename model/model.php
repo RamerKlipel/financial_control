@@ -47,4 +47,16 @@ class model {
     {
         return $this->strTable;
     }
+
+    public function getArraySelect(string $table, string $nmIdTable = '', string $nmValTable = ''): array
+    {
+        $upperTable = strtoupper($table);
+        $nmIdTable = !empty($nmIdTable) ? $nmIdTable : "ID$upperTable";
+        $nmValTable = !empty($nmValTable) ? $nmValTable : "NM$upperTable";
+
+        $sql = "SELECT $nmIdTable, $nmValTable
+                FROM $table";
+        $array = database::ExecuteSqlData($sql);
+        return $array;
+    }
 }

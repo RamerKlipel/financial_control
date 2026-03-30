@@ -35,10 +35,10 @@ trait table{
 
     public function renderTable(): void
     {
-        if (empty($this->getArrTable())) {
-            http_response_code(500);
-            throw new \Exception("It's necessary to have at least one column on the function Table");
-        }
+        // if (empty($this->getArrTable())) {
+        //     http_response_code(500);
+        //     throw new \Exception("It's necessary to have at least one column on the function Table");
+        // }
         $this->setArrData();
         // $this->handleArrTrtable();
         ob_start();

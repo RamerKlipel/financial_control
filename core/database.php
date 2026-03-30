@@ -117,4 +117,22 @@ class database {
         }
         return $arrColumns ?? [];
     }
+
+    public static function transactionStart()
+    {
+        $sql = "SET AUTOCOMMIT = 0";
+        self::ExecuteSql($sql);
+    }
+
+    public static function transactionCommit()
+    {
+        $sql = "SET AUTOCOMMIT = 1";
+        self::ExecuteSql($sql);
+    }
+
+    public static function rollback()
+    {
+        $sql = "ROLLBACK";
+        self::ExecuteSql($sql);
+    }
 }
