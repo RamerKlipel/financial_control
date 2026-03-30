@@ -3,16 +3,6 @@ require_once './vendor/autoload.php';
 require_once './config/control.php';
 require_once './core/functions.php';
 
-// try {
-// $conn = driver .':host='. host .';dbname='. dbname;
-// $password = trim(password);
-// $user = trim(user);
-// $pdo = new \PDO($conn, $user, $password, OPTIONS_PDO);
-// printr($pdo->query('show tables')->fetch());die;
-// } catch (PDOException | Exception $e) {
-// echo 'erro ao conectar ao banco de dados: ' .$e->getMessage(). ' arquivo: ' .$e->getFile(). ' linha: ' .$e->getLine(). ' Código do erro: ', $e->getCode();die;
-// }
-
 class index {
     public static function getController()
     {
