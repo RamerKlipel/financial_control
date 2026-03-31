@@ -16,16 +16,14 @@ $arrData = $this->getArrData();
             <th> <?= $th ?> </th>
         <?php endforeach; ?>
     <?php endif; ?>
-        <th> action </th>
+        <th></th>
     </thead>
     <tbody>
         <?php if (!empty($arrData)): ?>
             <?php foreach($arrData as $key => $arrTableData): ?>
                 <tr>
-                    <?php foreach($arrTableData as $strColumnName => $arrValueColumnName):?>
-                        <?php if (array_key_exists($strColumnName, $arrTable)): ?>
-                            <td <?= $arrTable[$strColumnName] ?>><?= $arrValueColumnName ?></td>
-                        <?php endif;?>
+                    <?php foreach($arrTable as $key => $arrDados): ?>
+                        <td <?= $arrTable[$key] ?? '' ?>><?= $arrTableData[$key] ?? '' ?></td>
                     <?php endforeach; ?>
                     <td>
                         <div class="btn-group-action">
