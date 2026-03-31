@@ -10,7 +10,7 @@ function getPagesPermissions(): array
 {
     return [
         // 'index',
-        'categories', 'bills', 'index',
+        'categories', 'bills', 'index', 'creditcard'
         //  'reports', 'settings',
     ];
 }
