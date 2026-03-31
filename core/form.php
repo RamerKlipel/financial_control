@@ -82,7 +82,7 @@ trait form {
         ];
     }
 
-    protected function addSelect(string $idInput, string $label = '', array $arrSelectOptions, array $arrAttrInput = [], array $arrAttrDiv = []): void
+    protected function addSelect(string $idInput, string $label = '', array $arrSelectOptions = [], array $arrAttrInput = [], array $arrAttrDiv = []): void
     {
         if ($this->action == "r") {
             $arrAttrInput['disabled'] = true;
