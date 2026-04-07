@@ -50,13 +50,23 @@ class model {
 
     public function getArraySelect(string $table, string $nmIdTable = '', string $nmValTable = ''): array
     {
-        $upperTable = strtoupper($table);
-        $nmIdTable = !empty($nmIdTable) ? $nmIdTable : "ID$upperTable";
-        $nmValTable = !empty($nmValTable) ? $nmValTable : "NM$upperTable";
+        $strUpperTable = strtoupper($table);
+        $nmIdTable = !empty($nmIdTable) ? $nmIdTable : "ID$strUpperTable";
+        $nmValTable = !empty($nmValTable) ? $nmValTable : "NM$strUpperTable";
 
         $sql = "SELECT $nmIdTable, $nmValTable
                 FROM $table";
-        $array = database::ExecuteSqlData($sql);
-        return $array;
+        $arrAssociative = database::executeSqlMountAssociativeArray($sql, $nmIdTable, $nmValTable);
+
+        return $arrAssociative;
+    }
+
+    public function getArrCreditCard(): array
+    {
+        $sql = "SELECT IDCREDITCARD, CONCAT(NMCREDITCARD, ' (',NRFINALFOURNUMBER, ')') NMCREDITCARD
+                FROM creditcard";
+        $arrCreditCard = Database::executeSqlMountAssociativeArray($sql, 'IDCREDITCARD', 'NMCREDITCARD');
+
+        return $arrCreditCard ?? [];
     }
 }

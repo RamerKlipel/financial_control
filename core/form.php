@@ -33,13 +33,15 @@ trait form {
         return $this->arrInputs;
     }
 
-    public function Submit(): void
+    public function Submit()
     {
-        if ($this->post && (!$this->get['complete'] ?? false)) {
+        if ($this->post && !($this->get['complete'] ?? false)) {
+            $this->post = array_filter($this->post);
             switch ($this->action) {
                 case 'c':
                     $arrPdo = $arrInsert = [];
 
+                    $this->handleTypeData($this->post);
                     foreach($this->post as $nmCampo => $value) {
                         $nmCampo = strtoupper($nmCampo);
                         $arrPdo[":$nmCampo"] = $value;
@@ -47,12 +49,12 @@ trait form {
                     }
 
                     Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);
-                    // TODO refatorar para utilizar o model
                 case 'u':
                     $arrPdo = $arrUpdate = [];
                     $nmTable = $this->getSqlTable();
                     $strIdTable = "ID" .strtoupper($nmTable);
 
+                    $this->handleTypeData($this->post);
                     foreach($this->post as $nmCampo => $value) {
                         $nmCampo = strtoupper($nmCampo);
                         $arrPdo[":$nmCampo"] = $value;
@@ -100,5 +102,19 @@ trait form {
     public function getWidth($nr): string
     {
         return "col-$nr";
+    }
+
+    public function handleTypeData($post)
+    {
+        foreach($this->post as $nmCampo => $value) {
+            $prefix = substr($nmCampo, 0, 2);
+            switch ($prefix) {
+                case 'DA':
+                    if (preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $value)) {
+                        $this->post[$nmCampo] = formatDateDB($value);
+                    }
+                    break;
+            }
+        }
     }
 }

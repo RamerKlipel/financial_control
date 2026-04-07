@@ -76,7 +76,7 @@ class html
 
 	private static function addSelectOption(array &$arrSelectOptions, array $arrAttrInput): void
 	{
-		if (!key_exists('required', $arrAttrInput)) {
+		if (!key_exists('placeholder', $arrAttrInput)) {
 			$arrSelectOptions = array_merge(["<option>Select:</option>"], $arrSelectOptions);
 		}
 	}

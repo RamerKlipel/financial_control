@@ -135,4 +135,28 @@ class database {
         $sql = "ROLLBACK";
         self::ExecuteSql($sql);
     }
+
+    public static function executeSqlMountAssociativeArray(string $sql, mixed $index, mixed $val, array $arrPdo = []): array
+    {
+        if (!$sql) {
+            return [];
+        }
+
+        $PDO = self::getConnDB();
+        $exec = $PDO->prepare($sql);
+
+        if (!$exec) {
+            return [];
+        }
+
+        $exec->execute($arrPdo);
+
+        $arr = $exec->fetchAll();
+        $arrAssociative = [];
+
+        foreach($arr as $arrVal) {
+            $arrAssociative[$arrVal[$index]] = $arrVal[$val];
+        }
+        return $arrAssociative;
+    }
 }

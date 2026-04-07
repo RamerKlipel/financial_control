@@ -14,6 +14,7 @@ class index {
 
         if (preg_match('/^([^@?]+)(?:@([^?]+))?/', $last, $matches)) {
             $class = $matches[1];
+            $class = (explode('.', $class)[0] ?? $class);
             if (!empty($matches[2] ?? "")) {
                 $function = $matches[2];
             }
