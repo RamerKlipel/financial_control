@@ -46,3 +46,15 @@ function formatDateDB($date): null|string
     }
     return $date;
 }
+
+function formatNumberBD(mixed $number): null|string
+{
+    if (empty($number)) {
+        return null;
+    }
+
+    $number = str_replace('.', '', $number);
+    $number = str_replace(',', '.', $number);
+
+    return $number;
+}

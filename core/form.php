@@ -114,6 +114,9 @@ trait form {
                         $this->post[$nmCampo] = formatDateDB($value);
                     }
                     break;
+                case 'VL':
+                    $this->post[$nmCampo] = formatNumberBD($value);
+
             }
         }
     }

@@ -21,6 +21,7 @@ abstract class pageForm extends core{
         $this->Form();
         $this->Table();
         $this->addJs("pageForm", ['type'=>"module"]);
+        $this->addJs("../utilities/maskhelper", ['type'=>"module"]);
     }
 
     private function setNmPage(?string $nmPage):void

@@ -15,7 +15,7 @@ class creditcard extends pageForm
     public function Form()
     {
         $this->addInput('text', 'NMCREDITCARD', 'Name', ['class' => 'form-control input', 'maxlength' => 150]);
-        $this->addInput('text', 'VLCREDITCARDLIMIT', 'Vl.Limit', ['class' => 'form-control input', 'maxlength' => 18]);
+        $this->addInput('text', 'VLCREDITCARDLIMIT', 'Vl.Limit', ['class' => 'form-control input', 'data-mask' => 'coin-decimal-152']);
         $this->addInput('text', 'NRFINALFOURNUMBER', 'Last Four Number', ['class' => 'form-control input', 'placeholder' => 'ex.: 1234', 'maxlength' => 4]);
     }
 
