@@ -1,4 +1,5 @@
 import mountModalAlert from "../utilities/mountmodalalert.js";
+import { helper } from "../utilities/helper.js";
 class pageForm {
     constructor() {
         this.elmtForm = document.querySelector('form');
@@ -12,6 +13,9 @@ class pageForm {
 
         document.getElementById('btnSubmit')?.addEventListener('click', (e) => {
             e.preventDefault();
+            if (!helper.verifyRequired(document)) {
+                return false;
+            }
             this.submit();
         });
 
@@ -67,13 +71,23 @@ class pageForm {
             body: formData
         })
         .then(res => {
+            console.log(res)
+            if (res.ok == false) {
+                if (!res.ok) {
+                    throw new Error('server error: ' + res.statusText);
+                }
+            }
             window.location.href = url+'?complete=true';
         })
         .catch(err => {
-            if (err) console.log(err);
-            if (submitBtn) {
-                submitBtn.disabled = false;
-            }
+            mountModalAlert({
+                'body': err.message,
+                'showCancelBtn': false,
+                'confirmBtnText': 'ok',
+                onConfirm:() => {
+                    submitBtn.disabled = false;
+                }
+            })
         })
     }
 

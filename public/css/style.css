@@ -81,6 +81,7 @@ td:last-child {
     align-items: end;
     margin: 15px 0 0 15px;
     opacity: 1;
+    transition: border 0.3s ease-in-out;
 }
 
 .input {
@@ -129,4 +130,13 @@ div.form-group {
 
 div.show, div.hide {
     transition: margin-left 0.5s ease-in-out, max-width 0.5s ease-in-out, max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.span-required {
+	color: red;
+	font-size: 12px;
+}
+
+.required {
+    border: red solid;
 }

@@ -9,6 +9,7 @@ class html
 	{
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 		$strAttrDiv = self::adjustAttr($arrAttrDiv);
+		$label = self::handleRequiredLabel($label, $arrAttrInput);
 
 		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
 		$label = "<label for=".$idInput.">$label</label>";
@@ -54,6 +55,7 @@ class html
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 		$strAttrDiv = self::adjustAttr($arrAttrDiv);
 		$strSelectOptions = self::handleSelectOptions($arrSelectOptions, $arrAttrInput, $inputVal);
+		$label = self::handleRequiredLabel($label, $arrAttrInput);
 
 		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
 		$label = "<label for=".$idInput.">$label</label>";
@@ -76,8 +78,17 @@ class html
 
 	private static function addSelectOption(array &$arrSelectOptions, array $arrAttrInput): void
 	{
-		if (!key_exists('placeholder', $arrAttrInput)) {
-			$arrSelectOptions = array_merge(["<option>Select:</option>"], $arrSelectOptions);
+		if (key_exists('placeholder', $arrAttrInput) && $arrAttrInput['placeholder'] == 1) {
+			$arrSelectOptions = array_merge(["<option value=''>Select:</option>"], $arrSelectOptions);
 		}
+	}
+
+	private static function handleRequiredLabel(string $label, array $arAttr): string
+	{
+		if (key_exists('required', $arAttr)) {
+			$label = $label . ' <span class="span-required">*</span>';
+		}
+
+		return $label;
 	}
 }
