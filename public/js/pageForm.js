@@ -38,7 +38,6 @@ class pageForm {
                                 window.location.reload();
                             })
                             .catch(res => {
-                                console.log(res);
                                 mountModalAlert({
                                     'body': res,
                                     'icon': 'error',
@@ -95,4 +94,4 @@ class pageForm {
     }
 }
 
-const pageform = new pageForm();
+new pageForm();

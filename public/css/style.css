@@ -80,6 +80,7 @@ td:last-child {
     gap: 20px;
     align-items: end;
     margin: 15px 0 0 15px;
+    opacity: 1;
 }
 
 .input {
@@ -110,4 +111,22 @@ div.form-group {
 
 #modalCancelBtn {
     margin-right: 10px;
+}
+
+.hide {
+    margin-left: -20px;
+    max-height: 0 !important;
+    max-width: 0 !important;
+    opacity: 0;
+}
+
+.show {
+    max-height: 500px !important;
+    max-width: 500px !important;
+    overflow: hidden;
+    opacity: 1;
+}
+
+div.show, div.hide {
+    transition: margin-left 0.5s ease-in-out, max-width 0.5s ease-in-out, max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
 }

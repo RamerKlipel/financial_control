@@ -53,7 +53,7 @@ class html
 	{
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 		$strAttrDiv = self::adjustAttr($arrAttrDiv);
-		$strSelectOptions = self::handleSelectOptions($arrSelectOptions);
+		$strSelectOptions = self::handleSelectOptions($arrSelectOptions, $arrAttrInput, $inputVal);
 
 		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
 		$label = "<label for=".$idInput.">$label</label>";
@@ -62,12 +62,22 @@ class html
 		return $divSelect;
 	}
 
-	private static function handleSelectOptions($arrSelectOptions): string
+	private static function handleSelectOptions(array $arrSelectOptions, array $arrAttrInput, mixed $inputVal): string
 	{
-		$strOptions = ["<option selected>Selecione:</option>"];
-		foreach($arrSelectOptions as $arrOption) {
-			$strOptions[] = "<option value=".$arrOption["IDCATEGORIE"].">".$arrOption["NMCATEGORIE"]."</option>";
+		foreach($arrSelectOptions as $value => $label) {
+			$selected = $value == $inputVal ? 'selected' : '';
+
+			$strOptions[] = "<option $selected value=".$value.">".$label."</option>";
 		}
+
+		self::addSelectOption($strOptions, $arrAttrInput);
 		return implode('', $strOptions);
+	}
+
+	private static function addSelectOption(array &$arrSelectOptions, array $arrAttrInput): void
+	{
+		if (!key_exists('placeholder', $arrAttrInput)) {
+			$arrSelectOptions = array_merge(["<option>Select:</option>"], $arrSelectOptions);
+		}
 	}
 }

@@ -14,7 +14,8 @@ class categories extends pageForm {
 
     public function Form(): void
     {
-        $this->addInput('text', 'NMCATEGORIE', 'Nome', ['required'=> true, 'class' => 'form-control input']);
+        $this->addInput('text', 'NMCATEGORIE', 'Name', ['required'=> true, 'class' => 'form-control input']);
+        $this->addSelect('FLACTIVE', 'Active', ['S' => 'Yes', 'N' => 'No'], ['required'=> true, 'class' => 'form-control input'], ['class' => $this->getWidth(2)]);
     }
 
     public function Table(): void
