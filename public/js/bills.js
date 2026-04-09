@@ -1,4 +1,4 @@
-import helper from '../utilities/helper.js';
+import {helper} from '../utilities/helper.js';
 class bills {
     constructor() {
         this.onChange();

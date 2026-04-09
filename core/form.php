@@ -1,6 +1,7 @@
 <?php
 namespace Core;
 use Core\database;
+use Exception;
 
 trait form {
     protected $viewFormContent;
@@ -35,37 +36,42 @@ trait form {
 
     public function Submit()
     {
-        if ($this->post && !($this->get['complete'] ?? false)) {
-            $this->post = array_filter($this->post);
-            switch ($this->action) {
-                case 'c':
-                    $arrPdo = $arrInsert = [];
+        try {
+            if ($this->post && !($this->get['complete'] ?? false)) {
+                $this->post = array_filter($this->post);
+                switch ($this->action) {
+                    case 'c':
+                        $arrPdo = $arrInsert = [];
 
-                    $this->handleTypeData($this->post);
-                    foreach($this->post as $nmCampo => $value) {
-                        $nmCampo = strtoupper($nmCampo);
-                        $arrPdo[":$nmCampo"] = $value;
-                        $arrInsert[$nmCampo] = ":$nmCampo";
-                    }
+                        $this->handleTypeData($this->post);
+                        foreach($this->post as $nmCampo => $value) {
+                            $nmCampo = strtoupper($nmCampo);
+                            $arrPdo[":$nmCampo"] = $value;
+                            $arrInsert[$nmCampo] = ":$nmCampo";
+                        }
 
-                    Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);
-                case 'u':
-                    $arrPdo = $arrUpdate = [];
-                    $nmTable = $this->getSqlTable();
-                    $strIdTable = "ID" .strtoupper($nmTable);
+                        Database::insert($this->getSqlTable(), $arrInsert, $arrPdo);
+                    case 'u':
+                        $arrPdo = $arrUpdate = [];
+                        $nmTable = $this->getSqlTable();
+                        $strIdTable = "ID" .strtoupper($nmTable);
 
-                    $this->handleTypeData($this->post);
-                    foreach($this->post as $nmCampo => $value) {
-                        $nmCampo = strtoupper($nmCampo);
-                        $arrPdo[":$nmCampo"] = $value;
-                        $arrUpdate[] = "$nmCampo = :$nmCampo";
-                    };
+                        $this->handleTypeData($this->post);
+                        foreach($this->post as $nmCampo => $value) {
+                            $nmCampo = strtoupper($nmCampo);
+                            $arrPdo[":$nmCampo"] = $value;
+                            $arrUpdate[] = "$nmCampo = :$nmCampo";
+                        };
 
-                    $arrPdo[":$strIdTable"] = $this->id;
-                    $where = "$strIdTable = :$strIdTable";
+                        $arrPdo[":$strIdTable"] = $this->id;
+                        $where = "$strIdTable = :$strIdTable";
 
-                    Database::update($this->getSqlTable(), $arrUpdate, $where, $arrPdo);
+                        Database::update($this->getSqlTable(), $arrUpdate, $where, $arrPdo);
+                }
             }
+        } catch (Exception $e) {
+            http_response_code(500);
+            throw new Exception($e->getMessage());
         }
     }
 
