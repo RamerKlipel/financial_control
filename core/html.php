@@ -7,13 +7,17 @@ class html
 
 	public static function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = [], array $arrAttrDiv = [], mixed $inputVal = ''): string
 	{
+		if ($inputVal) {
+			$arrAttrInput['value'] = $inputVal;
+		}
+
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 		$strAttrDiv = self::adjustAttr($arrAttrDiv);
 		$label = self::handleRequiredLabel($label, $arrAttrInput);
 
 		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
 		$label = "<label for=".$idInput.">$label</label>";
-		$input = "<input type=\"".$type."\" name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput value='$inputVal'></input>";
+		$input = "<input type=\"".$type."\" name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput></input>";
 		$divInput = $abreDiv.$label.$input."</div>";
 		return $divInput;
 	}

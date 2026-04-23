@@ -55,7 +55,8 @@ class model {
         $nmValTable = !empty($nmValTable) ? $nmValTable : "NM$strUpperTable";
 
         $sql = "SELECT $nmIdTable, $nmValTable
-                FROM $table";
+                FROM $table
+                ORDER BY $nmIdTable";
         $arrAssociative = database::executeSqlMountAssociativeArray($sql, $nmIdTable, $nmValTable);
 
         return $arrAssociative;
