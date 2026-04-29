@@ -1,4 +1,5 @@
 <?php
+namespace Core;
 use Core\migrationManager;
 
 $command = ($argv[1] ?? "");
