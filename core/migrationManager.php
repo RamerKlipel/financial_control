@@ -1,14 +1,14 @@
 <?php
 namespace Core;
 
-use model\migrationmanagerModel;
+use model\migrationManagerModel;
 
 class migrationManager
 {
     protected $model;
     public function __construct()
     {
-        $this->model = new migrationmanagerModel();
+        $this->model = new migrationManagerModel();
         $this->createTableMigration();
         $this->playMigrations();
     }

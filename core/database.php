@@ -1,5 +1,6 @@
 <?php
 namespace Core;
+require_once './config/app.php';
 
 class database {
     private static $PDO = null;
