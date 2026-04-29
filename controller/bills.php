@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Core\pageForm;
 
-class Bills extends pageForm {
+class bills extends pageForm {
 
     public function __construct()
     {

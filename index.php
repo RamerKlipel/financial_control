@@ -5,7 +5,6 @@ if (file_exists('./config/control.php')) {
     require_once './config/control.php';
 }
 
-require_once './config/app.php';
 require_once './core/functions.php';
 
 class index {
