@@ -1,6 +1,11 @@
 <?php
 require_once './vendor/autoload.php';
-require_once './config/control.php';
+
+if (file_exists('./config/control.php')) {
+    require_once './config/control.php';
+}
+
+require_once './config/app.php';
 require_once './core/functions.php';
 
 class index {
