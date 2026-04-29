@@ -64,14 +64,13 @@ class pageForm {
 
         const formData = new FormData(this.elmtForm);
         const url = this.getActionForm();
-        const completeUrl = this.getFetchUrl(url);
+        const completeUrl = this.getFetchUrl(url).trim('/').replace('/', '');
 
         fetch(completeUrl, {
             method: 'post',
             body: formData
         })
         .then(res => {
-            console.log(res)
             if (res.ok == false) {
                 if (!res.ok) {
                     throw new Error('server error: ' + res.statusText);

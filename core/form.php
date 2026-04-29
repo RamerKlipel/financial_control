@@ -39,6 +39,7 @@ trait form {
         try {
             if ($this->post && !($this->get['complete'] ?? false)) {
                 $this->post = array_filter($this->post);
+                $this->post = array_intersect_key($this->post, array_flip($this->fieldsSubmit[0] ?? []));
                 switch ($this->action) {
                     case 'c':
                         $arrPdo = $arrInsert = [];

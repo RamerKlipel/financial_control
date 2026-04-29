@@ -6,6 +6,7 @@ class categories extends pageForm {
     public function __construct()
     {
         parent::__construct('Categories', 'categorie');
+        $this->setFieldsSubmit(["NMCATEGORIE", "FLACTIVE"]);
         $sql = "SELECT *
                 FROM categorie
                 WHERE TRUE {{WHERE}}";
