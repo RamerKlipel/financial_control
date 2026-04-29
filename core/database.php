@@ -120,17 +120,17 @@ class database {
 
     public static function transactionStart()
     {
-        $sql = "SET AUTOCOMMIT = 0";
+        $sql = "START TRANSACTION";
         self::ExecuteSql($sql);
     }
 
     public static function transactionCommit()
     {
-        $sql = "SET AUTOCOMMIT = 1";
+        $sql = "COMMIT";
         self::ExecuteSql($sql);
     }
 
-    public static function rollback()
+    public static function transactionRollback()
     {
         $sql = "ROLLBACK";
         self::ExecuteSql($sql);
