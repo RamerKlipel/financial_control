@@ -39,10 +39,9 @@ class migrationManager
                 $this->model->insertMigration($nmMigration);
                 $this->transactionCommit();
             } catch (\Exception $e) {
-                $this->model->executeSqlMigration($migration->down());
-                $this->rollback();
+                $this->transactionRollback();
                 http_response_code(500);
-                throw new \Exception($e->getMessage(), 500);
+                throw new \Exception("Migration error $nmMigration: ".$e->getMessage(), 500);
             }
             unset($migration);
         }
@@ -68,8 +67,8 @@ class migrationManager
         $this->model->transactionCommit();
     }
 
-    public function rollback() {
-        $this->model->rollback();
+    public function transactionRollback() {
+        $this->model->transactionRollback();
     }
 
 }

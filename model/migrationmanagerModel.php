@@ -46,9 +46,9 @@ class migrationManagerModel
         database::transactionCommit();
     }
 
-    public function rollback()
+    public function transactionRollback()
     {
-        database::rollback();
+        database::transactionRollback();
     }
 
 
