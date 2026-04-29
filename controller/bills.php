@@ -8,26 +8,23 @@ class Bills extends pageForm {
     public function __construct()
     {
         parent::__construct('Bills', 'bill');
-        $sql = "SELECT b.*, c.NMCATEGORIE, CONCAT(NMCREDITCARD, ' (',NRFINALFOURNUMBER, ')') NMCREDITCARD,
-        (
-        CASE b.TPPAYMENT
-            WHEN 'PX' THEN 'Pix'
-            WHEN 'CC' THEN 'Credit Card'
-            WHEN 'CD' THEN 'Debit Card'
-        END
-        ) TPPAYMENT,
-        (
-        CASE b.FLPAID
-            WHEN 'S' THEN 'Yes'
-            ELSE 'No'
-        END
-        ) FLPAID,
-        (
-        CASE b.FLINSTALLMENT
-            WHEN 'S' THEN 'Yes'
-            ELSE 'No'
-        END
-        ) FLINSTALLMENT
+        $this->setFieldsSubmit([
+            "NMBILL", "IDCATEGORIE", "VLBILL", "FLPAID", "FLINSTALLMENT",
+            "NRINSTALLMENT", "TPPAYMENT", "IDCREDITCARD", "DSWHERESPENT", "DABILL", "DADUE", "DAPAYMENT", "FLACTIVE"
+        ]);
+        $sql = "SELECT b.NMBILL, b.IDCATEGORIE, b.VLBILL, b.FLPAID, b.FLINSTALLMENT, b.NRINSTALLMENT, b.TPPAYMENT, b.IDCREDITCARD, b.DSWHERESPENT, b.DABILL, b.DADUE, b.DAPAYMENT, b.FLACTIVE,
+                       c.NMCATEGORIE, CONCAT(cc.NMCREDITCARD, ' (',cc.NRFINALFOURNUMBER, ')') NMCREDITCARD,
+                    (CASE b.TPPAYMENT
+                        WHEN 'PX' THEN 'Pix'
+                        WHEN 'CC' THEN 'Credit Card'
+                        WHEN 'CD' THEN 'Debit Card'
+                    END) TPPAYMENT, (CASE b.FLPAID
+                        WHEN 'S' THEN 'Yes'
+                        ELSE 'No'
+                    END) FLPAID, ( CASE b.FLINSTALLMENT
+                        WHEN 'S' THEN 'Yes'
+                        ELSE 'No'
+                    END) FLINSTALLMENT
                 FROM bill b
                 JOIN categorie c on c.IDCATEGORIE = b.IDCATEGORIE
                 LEFT JOIN creditcard cc on cc.IDCREDITCARD = b.IDCREDITCARD
@@ -46,9 +43,9 @@ class Bills extends pageForm {
         $this->addSelect('TPPAYMENT', 'Payment', getArrPayments(), ['required' => true, 'placeholder' => true, 'class' => 'form-select']);
         $this->addSelect('IDCREDITCARD', 'Credit Card', $this->getArrCreditCard(), ['required' => true, 'placeholder' => true, 'class' => 'form-select']);
         $this->addInput('text', 'DSWHERESPENT', 'Where Spent', ['required' => true, 'class' => 'form-control input']);
-        $this->addInput('text', 'DABILL', 'Bill date', ['required' => true, 'class' => 'form-control input', 'data-mask' => 'BRdate', 'value' => date("d/m/Y")]); //TODO make date mask
-        $this->addInput('text', 'DADUE', 'Due date', ['class' => 'form-control input', 'data-mask' => 'BRdate']); //TODO make date mask
-        $this->addInput('text', 'DAPAYMENT', 'Payment date', ['class' => 'form-control input', 'data-mask' => 'BRdate']); //TODO make date mask
+        $this->addInput('text', 'DABILL', 'Bill date', ['required' => true, 'class' => 'form-control input', 'data-mask' => 'BRdate', 'placeholder' => date("d/m/Y")]);
+        $this->addInput('text', 'DADUE', 'Due date', ['class' => 'form-control input', 'data-mask' => 'BRdate']);
+        $this->addInput('text', 'DAPAYMENT', 'Payment date', ['class' => 'form-control input', 'data-mask' => 'BRdate']);
         $this->addSelect('FLACTIVE', 'Active', ['S' => 'Yes', 'N' => 'No'], ['required'=> true, 'class' => 'form-select'], ['class' => $this->getWidth(0)]);
     }
 
