@@ -24,7 +24,12 @@ class database {
         if (!$sql) {
             return null;
         }
-        $PDO = self::getConnDB();
+
+        if (!isset($PDO)) {
+            $PDO = self::getConnDB();
+        }
+
+
         $exec = $PDO->prepare($sql);
         if (!$exec) {
             return null;
@@ -39,7 +44,11 @@ class database {
         if (!$sql) {
             return [];
         }
-        $PDO = self::getConnDB();
+
+        if (!isset($PDO)) {
+            $PDO = self::getConnDB();
+        }
+
         $exec = $PDO->prepare($sql);
         if (!$exec) {
             return [];
@@ -143,16 +152,7 @@ class database {
             return [];
         }
 
-        $PDO = self::getConnDB();
-        $exec = $PDO->prepare($sql);
-
-        if (!$exec) {
-            return [];
-        }
-
-        $exec->execute($arrPdo);
-
-        $arr = $exec->fetchAll();
+        $arr = Database::ExecuteSqlData($sql, $arrPdo);
         $arrAssociative = [];
 
         foreach($arr as $arrVal) {
