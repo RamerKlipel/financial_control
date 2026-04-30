@@ -8,7 +8,7 @@ class database {
     {
         if (self::$PDO == null) {
             try {
-                $conn = getenv("DB_DRIVER") .':host='. getenv("DB_HOST") .';dbname='. getenv("DB_NAME");
+                $conn = getenv("DB_DRIVER") .':host='. getenv("DB_HOST") . ";port=" . getenv("DB_PORT") .';dbname='. getenv("DB_NAME");
                 $password = trim(getenv("DB_PW"));
                 $user = trim(getenv("DB_USER"));
                 self::$PDO = new \PDO($conn, $user, $password, OPTIONS_PDO);
