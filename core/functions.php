@@ -10,8 +10,9 @@ function getPagesPermissions(): array
 {
     return [
         // 'index',
-        'categories', 'bills', 'index', 'creditcard'
+        'categories', 'bills', 'index', 'creditcard',
         //  'reports', 'settings',
+        'ChatOllama'
     ];
 }
 

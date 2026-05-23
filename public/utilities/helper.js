@@ -25,4 +25,18 @@ export class helper {
         }
         return true;
     }
+
+    static setTrigger(elmt, type, fn) {
+        elmt?.addEventListener(type, (e) => fn(e));
+    }
+
+    static getActionForm() {
+        const elmtForm = document.querySelector('form');
+        const action = elmtForm?.getAttribute('action');
+        return action;
+    }
+
+    static getUrlFecth(method) {
+        return window.location.href + "@" + method;
+    }
 }

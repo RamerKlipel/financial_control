@@ -50,7 +50,4 @@ class migrationManagerModel
     {
         database::transactionRollback();
     }
-
-
-
 }
