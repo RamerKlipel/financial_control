@@ -2,3 +2,4 @@ control.php
 LICENSE
 vault-embeddings.json
 php.ini
+vendor/
