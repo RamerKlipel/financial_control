@@ -1,4 +1,5 @@
 <?php
+require_once './core/errorhandler.php';
 require_once './vendor/autoload.php';
 
 if (file_exists('./config/control.php')) {
@@ -8,7 +9,7 @@ if (file_exists('./config/control.php')) {
 require_once './core/functions.php';
 
 class index {
-    public static function getController()
+    public static function getController(): void
     {
         $class = $function = '';
         $params = $_GET;
@@ -24,19 +25,24 @@ class index {
             }
         }
 
-        if (!in_array($class, getPagesPermissions())) {
+        if (!in_array($class, getPagesPermissions()) || !file_exists("./controller/$class.php")) {
             callViewFrom('emptyindex');
             echo '<h1 style="margin: 0">Erro 404! Página não encontrada></h1>';die;
         } else {
-            require_once "./controller/$class.php";
-            $nmClasse = "Controllers\\".$class;
-            $controller = new $nmClasse;
+            try {
+                require_once "./controller/$class.php";
+                $nmClasse = "Controllers\\".$class;
+                $controller = new $nmClasse;
 
-            if (!empty($function) && method_exists($controller, $function)) {
-                call_user_func_array([$controller, $function], array_values($params) ?: []);
+                if (!empty($function) && method_exists($controller, $function)) {
+                    call_user_func_array([$controller, $function], array_values($params) ?: []);
+                } else {
+                    $controller->render();
+                }
+            } catch (\Exception $e) {
+                callViewFrom('emptyindex');
+                printr("Ocorreu um erro ao acessar a classe: '$class' \n Error: ".$e->getMessage());die;
             }
-
-            $controller->render();
         }
     }
 }

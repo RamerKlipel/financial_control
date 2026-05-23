@@ -85,7 +85,7 @@ class database {
                     VALUE ($strColumnsPdo)";
             $res = self::ExecuteSql($sql, $arrPdo);
         }
-        return $res;
+        return $res ?? '';
     }
 
     public static function delete(string $strTable, string $where, array $arrPdo = []): string
@@ -146,7 +146,7 @@ class database {
         self::ExecuteSql($sql);
     }
 
-    public static function executeSqlMountAssociativeArray(string $sql, mixed $index, mixed $val, array $arrPdo = []): array
+    public static function executeSqlMountAssociativeArray(string $sql, string $index, string $val, array $arrPdo = []): array
     {
         if (!$sql) {
             return [];

@@ -82,7 +82,7 @@ abstract class pageForm extends core{
         if (in_array($this->action, ['r', 'u', 'c'])) {
             $this->renderForm();
         } else if (in_array($this->action, ['d'])) {
-            $this->handleDeleteTable();
+            $this->handleDelete();
         } else {
             $this->renderTable();
         }

@@ -1,6 +1,6 @@
 import mountModalAlert from "../utilities/mountmodalalert.js";
 import { helper } from "../utilities/helper.js";
-class pageForm {
+new class pageForm {
     constructor() {
         this.elmtForm = document.querySelector('form');
         this.setBinds();
@@ -106,5 +106,3 @@ class pageForm {
         return completeUrl;
     }
 }
-
-new pageForm();

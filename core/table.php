@@ -73,7 +73,7 @@ trait table{
         return $this->arrPermTitle;
     }
 
-    public function handleDeleteTable(): ?string // TODO passar database pro model
+    public function handleDelete(): ?string // TODO passar database pro model
     {
         $id = ($this->get['id'] ?? null);
         if (($this->get['action'] ?? null) == 'd' && $id != null) {

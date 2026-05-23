@@ -25,7 +25,15 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        tasks
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- <li><a class="dropdown-item" href="Chat">Chat</a></li> -->
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle disabled" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Filter
                     </a>
                     <ul class="dropdown-menu">
@@ -33,6 +41,11 @@
                     </ul>
                 </li>
             </ul>
+        </div>
+        <div class="divChatOlllama" style="display: inline">
+            <a href="ChatOllama" style="color: black">
+                <i class="fa fa-message"></i>
+            </a>
         </div>
     </div>
 </nav>

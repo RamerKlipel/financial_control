@@ -25,7 +25,6 @@ $arrData = !empty($this->getArrData()) ? $this->getArrData()[0] : [];
                 }
                 ?>
 
-
             <?php endforeach; ?>
         <?php endif; ?>
     </div>

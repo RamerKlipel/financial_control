@@ -15,7 +15,7 @@ trait form {
     {
         if (empty($this->getArrInputs())) {
             http_response_code(500);
-            throw new \Exception("It's necessary to have at least one field on the function Form");
+            throw new Exception("It's necessary to have at least one field on the function Form");
 
         }
         if (in_array($this->action, ['r', 'u']) && !empty($this->id)) {
@@ -106,7 +106,7 @@ trait form {
         ];
     }
 
-    public function getWidth($nr): string
+    public function getWidth($nr = 0): string
     {
         return "col-$nr";
     }
