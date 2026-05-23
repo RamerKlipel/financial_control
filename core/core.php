@@ -1,7 +1,8 @@
 <?php
 namespace Core;
 
-use Core\database;
+use Core\session;
+
 abstract class core {
     public $get = [];
     public $post = [];
@@ -22,7 +23,12 @@ abstract class core {
         $arrUrl = $this->handleUrl($this->get['url']);
         $class = $arrUrl['CLASS'];
         $this->setModel($class);
-        $this->setSqlTable($sqlTable);
+        Session::start();
+
+        if (empty($arrUrl['METHOD'])) {
+            $this->setSqlTable($sqlTable);
+            $this->main();
+        }
     }
 
     protected function setSql(string $sql): void
@@ -57,8 +63,17 @@ abstract class core {
         $this->post = $_POST;
         $this->request = array_merge($this->get, $this->post);
         $this->server = $_SERVER;
-        $this->action = $_GET["action"] ?? "";
-        $this->id = $_GET["id"] ?? "";
+        $this->action = ($this->get["action"] ?? "");
+        $this->id = filter_var(($this->get['id'] ?? ""), FILTER_VALIDATE_INT);
+
+        $jsonInput = file_get_contents('php://input');
+
+        if (!empty($jsonInput)) {
+            $jsonInput = json_decode($jsonInput, true);
+            if (is_array($jsonInput)) {
+                $this->post = array_merge($this->post, $jsonInput);
+            }
+        }
 
         unset($_GET);
         unset($_POST);
@@ -96,7 +111,7 @@ abstract class core {
         foreach($attrScrpit as $key => $val) {
             $arrAttrScript[] = " $key=\"$val\"";
         }
-        $this->arrJs[] = "<script ".implode(" ", $arrAttrScript)." src=\"./public/js/$js.js\" ></script>";
+        $this->arrJs[] = "<script ".implode(" ", $arrAttrScript)." src=\"./public/js/$js.js\"></script>";
 
     }
 
@@ -155,4 +170,6 @@ abstract class core {
     {
         return $this->model->getDebugSql();
     }
+
+    public function main() {}
 }

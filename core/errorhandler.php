@@ -17,11 +17,11 @@ register_shutdown_function(function() {
     $error = error_get_last();
     if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
         http_response_code(500);
-        // echo json_encode([
-        //     'error' => $error['message'],
-        //     'file' => $error['file'],
-        //     'line' => $error['line'],
-        //     'trace' => $error['trace'],
-        // ]);
+        echo json_encode([
+            'error' => $error['message'],
+            'file' => $error['file'],
+            'line' => $error['line'],
+            'trace' => $error['trace'],
+        ]);
     }
 });
