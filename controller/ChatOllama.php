@@ -71,9 +71,9 @@ class ChatOllama extends Core {
             if ($chunk != "") {
                 $completeAnswer .= $chunk;
                 echo "data: " .json_encode($chunk). "\n\n";
-                // if (ob_get_length()) {
-                //     ob_flush();
-                // }
+                if (ob_get_length()) {
+                    ob_flush();
+                }
                 flush();
             }
         }
