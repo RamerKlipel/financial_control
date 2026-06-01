@@ -35,10 +35,11 @@ class model {
     public function getArrData(): array
     {
         $arrDados = database::ExecuteSqlData($this->sql, $this->getArrPdo());
+        $this->handleTypeDataGet($arrDados);
         return $arrDados;
     }
 
-    public function setSqlTable($strTable):void
+    public function setSqlTable(string $strTable):void
     {
         $this->strTable = $strTable;
     }
@@ -69,5 +70,29 @@ class model {
         $arrCreditCard = Database::executeSqlMountAssociativeArray($sql, 'IDCREDITCARD', 'NMCREDITCARD');
 
         return $arrCreditCard ?? [];
+    }
+
+    public function handleTypeDataGet(array &$post)
+    {
+        foreach(($post[0] ?? []) as $nmCampo => $value) {
+            if (empty($value)) {
+                continue;
+            }
+            $prefix = substr($nmCampo, 0, 2);
+            switch ($prefix) {
+                case 'DA':
+                    if (preg_match("/[0-9]{4}-[0-9]{2}-[0-9]{2}/", $value)) {
+                        if (strlen($value) > 11) {
+                            $post[0][$nmCampo] = formatDateHourUser($value);
+                        } else {
+                            $post[0][$nmCampo] = formatDateUser($value);
+                        }
+                    }
+                    break;
+                case 'VL':
+                    $post[0][$nmCampo] = formatNumberUser($value);
+                    break;
+            }
+        }
     }
 }
