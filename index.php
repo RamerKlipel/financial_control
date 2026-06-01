@@ -1,5 +1,10 @@
 <?php
 require_once './core/errorhandler.php';
+
+use Core\ErrorHandler;
+
+ErrorHandler::setHandler();
+
 require_once './vendor/autoload.php';
 require_once './core/functions.php';
 
@@ -39,8 +44,7 @@ class index {
                     $controller->render();
                 }
             } catch (\Exception $e) {
-                callViewFrom('emptyindex');
-                printr("Ocorreu um erro ao acessar a classe: '$class' \n Error: ".$e->getMessage());die;
+                throw $e;
             }
         }
     }

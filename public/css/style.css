@@ -1,3 +1,8 @@
+:root {
+    --principalColor: #6f42c1;
+    --secondaryColor: #59359a;
+}
+
 body {
     background-color: rgb(0 0 0 / 4%);
 }
@@ -122,8 +127,8 @@ div.form-group {
 }
 
 .show {
-    max-height: 500px !important;
-    max-width: 500px !important;
+    /* max-height: 500px !important; */
+    /* max-width: 500px !important; */
     overflow: hidden;
     opacity: 1;
 }
@@ -139,4 +144,10 @@ div.show, div.hide {
 
 .required {
     border: red solid;
+}
+
+.center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
