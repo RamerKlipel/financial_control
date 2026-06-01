@@ -70,11 +70,15 @@ new class pageForm {
             method: 'post',
             body: formData
         })
-        .then(res => {
+        .then(async res => {
+            const text = await res.text();
+
+            if (text.length > 0) {
+                throw new Error('debug: ' + text);
+            }
+
             if (res.ok == false) {
-                if (!res.ok) {
-                    throw new Error('server error: ' + res.statusText);
-                }
+                throw new Error('server error: ' + res.statusText);
             }
             window.location.href = url+'?complete=true';
         })

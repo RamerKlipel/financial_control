@@ -1,12 +1,16 @@
 <?php
 require_once './core/errorhandler.php';
+
+use Core\ErrorHandler;
+
+ErrorHandler::setHandler();
+
 require_once './vendor/autoload.php';
+require_once './core/functions.php';
 
 if (file_exists('./config/control.php')) {
     require_once './config/control.php';
 }
-
-require_once './core/functions.php';
 
 class index {
     public static function getController(): void
@@ -40,10 +44,10 @@ class index {
                     $controller->render();
                 }
             } catch (\Exception $e) {
-                callViewFrom('emptyindex');
-                printr("Ocorreu um erro ao acessar a classe: '$class' \n Error: ".$e->getMessage());die;
+                throw $e;
             }
         }
     }
 }
-echo index::getController();
+
+index::getController();
