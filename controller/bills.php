@@ -43,7 +43,7 @@ class bills extends pageForm {
         $this->addSelect('TPPAYMENT', 'Payment', getArrPayments(), ['required' => true, 'placeholder' => true, 'class' => 'form-select']);
         $this->addSelect('IDCREDITCARD', 'Credit Card', $this->getArrCreditCard(), ['required' => true, 'placeholder' => true, 'class' => 'form-select']);
         $this->addInput('text', 'DSWHERESPENT', 'Where Spent', ['required' => true, 'class' => 'form-control input']);
-        $this->addInput('text', 'DABILL', 'Bill date', ['required' => true, 'class' => 'form-control input', 'data-mask' => 'BRdate', 'placeholder' => date("d/m/Y")]);
+        $this->addInput('text', 'DABILL', 'Bill date', ['required' => true, 'class' => 'form-control input', 'data-mask' => 'BRdatehour', 'placeholder' => date("d/m/Y")]);
         $this->addInput('text', 'DADUE', 'Due date', ['class' => 'form-control input', 'data-mask' => 'BRdate']);
         $this->addInput('text', 'DAPAYMENT', 'Payment date', ['class' => 'form-control input', 'data-mask' => 'BRdate']);
         $this->addSelect('FLACTIVE', 'Active', ['S' => 'Yes', 'N' => 'No'], ['required'=> true, 'class' => 'form-select'], ['class' => $this->getWidth(0)]);
