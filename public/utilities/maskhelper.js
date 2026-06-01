@@ -4,7 +4,7 @@ export class maskhelper {
     }
 
     setBinds() {
-        document.querySelectorAll('[data-mask]')?.forEach(this.handleMaskType);
+        document.querySelectorAll('[data-mask]')?.forEach(elmt => this.handleMaskType(elmt));
     }
 
     handleMaskType(elmt) {
@@ -32,14 +32,13 @@ export class maskhelper {
                         return;
                     }
 
-                    const valSplit = val.split('');
                     let date = "";
                     for (let i = 0; i < 8; i++) {
-                        if (valSplit[i] != undefined) {
+                        if (val[i] != undefined) {
                             if ([2, 4].includes(i)) {
                                 date += "/";
                             }
-                            date += valSplit[i];
+                            date += val[i];
                         }
                     }
                     elmt.value = date;

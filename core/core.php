@@ -1,32 +1,33 @@
 <?php
+
 namespace Core;
 
 use Core\session;
 
-abstract class core {
+abstract class core
+{
     public $get = [];
     public $post = [];
     public $request = [];
     public $server = [];
     public $action = "";
-    public $id = null;
-    protected $model;
-    protected $viewContent;
-    protected $sqlTable = "";
+    public ?int $id = null;
+    protected object $model;
+    protected string $viewContent;
     protected $arrJs = [];
     protected $arrCss = [];
     protected $arrPermCRUD = ["c" => true, "r" => true, "u" => true, "d" => true];
 
 
-    public function __construct(string $sqlTable) {
+    public function __construct(string $sqlTable)
+    {
         $this->handleGlobalVariables();
-        $arrUrl = $this->handleUrl($this->get['url']);
-        $class = $arrUrl['CLASS'];
-        $this->setModel($class);
+        $arrUrl = !empty($this->get['url'] ?? "") ? $this->handleUrl($this->get['url']) : [];
+        $this->setModel($arrUrl['CLASS'] ?? "");
         Session::start();
+        $this->setSqlTable($sqlTable);
 
         if (empty($arrUrl['METHOD'])) {
-            $this->setSqlTable($sqlTable);
             $this->main();
         }
     }
@@ -54,7 +55,7 @@ abstract class core {
 
     protected function callViewFrom(String $path): void
     {
-        include_once __DIR__. "/../view/$path.view.php";
+        include_once __DIR__ . "/../view/$path.view.php";
     }
 
     private function handleGlobalVariables(): void
@@ -84,12 +85,12 @@ abstract class core {
 
     private function setModel(string $model): void
     {
-        if (file_exists(__DIR__."/../model/".$model."Model.php")) {
-            require_once __DIR__. "/../model/".$model."Model.php";
-            $model = "\model\\".$model."Model";
+        if (file_exists(__DIR__ . "/../model/" . $model . "Model.php")) {
+            require_once __DIR__ . "/../model/" . $model . "Model.php";
+            $model = "\model\\" . $model . "Model";
             $this->model = new $model();
         } else {
-            require_once __DIR__."/../model/model.php";
+            require_once __DIR__ . "/../model/model.php";
             $model = "\model\\Model";
             $this->model = new $model();
         }
@@ -108,11 +109,10 @@ abstract class core {
     protected function addJs(string $js, $attrScrpit = []): void
     {
         $arrAttrScript = [];
-        foreach($attrScrpit as $key => $val) {
+        foreach ($attrScrpit as $key => $val) {
             $arrAttrScript[] = " $key=\"$val\"";
         }
-        $this->arrJs[] = "<script ".implode(" ", $arrAttrScript)." src=\"./public/js/$js.js\"></script>";
-
+        $this->arrJs[] = "<script " . implode(" ", $arrAttrScript) . " src=\"./public/js/$js.js\"></script>";
     }
 
     protected function addCss(string $css): void
@@ -156,12 +156,17 @@ abstract class core {
         return ($arrUrl ?? []);
     }
 
-    public function handleSqlVar($sql): string
+    public function handleSqlVar(string $sql): string
     {
+        $idTable = "ID" . strtoupper($this->model->getSqlTable());
         if (!empty($this->action) && in_array($this->action, ['r', 'u']) && !empty($this->id)) {
-            $sql = str_replace('{{WHERE}}', "AND ID".strtoupper($this->getSqlTable()). " = $this->id", $sql);
+            $sql = str_replace('{{WHERE}}', "AND $idTable = $this->id", $sql);
         } else {
             $sql = str_replace('{{WHERE}}', "", $sql);
+        }
+
+        if (!str_contains($sql, $idTable)) { //TODO make tratament for dev only, just in case
+            throw new \Exception("Table ID not especified in the main sql", 500);
         }
         return $sql;
     }
@@ -171,5 +176,5 @@ abstract class core {
         return $this->model->getDebugSql();
     }
 
-    public function main() {}
+    public function main():void {}
 }

@@ -1,12 +1,11 @@
 <?php
 require_once './core/errorhandler.php';
 require_once './vendor/autoload.php';
+require_once './core/functions.php';
 
 if (file_exists('./config/control.php')) {
     require_once './config/control.php';
 }
-
-require_once './core/functions.php';
 
 class index {
     public static function getController(): void
@@ -46,4 +45,5 @@ class index {
         }
     }
 }
-echo index::getController();
+
+index::getController();

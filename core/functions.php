@@ -9,9 +9,7 @@ function printr(mixed $mix):void
 function getPagesPermissions(): array
 {
     return [
-        // 'index',
         'categories', 'bills', 'index', 'creditcard',
-        //  'reports', 'settings',
         'ChatOllama'
     ];
 }

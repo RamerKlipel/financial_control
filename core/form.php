@@ -67,7 +67,7 @@ trait form {
                         $arrPdo[":$strIdTable"] = $this->id;
                         $where = "$strIdTable = :$strIdTable";
 
-                        Database::update($this->getSqlTable(), $arrUpdate, $where, $arrPdo);
+                        Database::update($nmTable, $arrUpdate, $where, $arrPdo);
                 }
             }
         } catch (Exception $e) {

@@ -13,18 +13,18 @@ class bills extends pageForm {
             "NRINSTALLMENT", "TPPAYMENT", "IDCREDITCARD", "DSWHERESPENT", "DABILL", "DADUE", "DAPAYMENT", "FLACTIVE"
         ]);
         $sql = "SELECT b.NMBILL, b.IDCATEGORIE, b.VLBILL, b.FLPAID, b.FLINSTALLMENT, b.NRINSTALLMENT, b.TPPAYMENT, b.IDCREDITCARD, b.DSWHERESPENT, b.DABILL, b.DADUE, b.DAPAYMENT, b.FLACTIVE,
-                       c.NMCATEGORIE, CONCAT(cc.NMCREDITCARD, ' (',cc.NRFINALFOURNUMBER, ')') NMCREDITCARD,
+                       c.NMCATEGORIE, CONCAT(cc.NMCREDITCARD, ' (',cc.NRFINALFOURNUMBER, ')') NMCREDITCARD, b.IDBILL,
                     (CASE b.TPPAYMENT
                         WHEN 'PX' THEN 'Pix'
                         WHEN 'CC' THEN 'Credit Card'
                         WHEN 'CD' THEN 'Debit Card'
-                    END) TPPAYMENT, (CASE b.FLPAID
+                    END) DSPAYMENT, (CASE b.FLPAID
                         WHEN 'S' THEN 'Yes'
                         ELSE 'No'
-                    END) FLPAID, ( CASE b.FLINSTALLMENT
+                    END) DSPAID, ( CASE b.FLINSTALLMENT
                         WHEN 'S' THEN 'Yes'
                         ELSE 'No'
-                    END) FLINSTALLMENT
+                    END) DSINSTALLMENT
                 FROM bill b
                 JOIN categorie c on c.IDCATEGORIE = b.IDCATEGORIE
                 LEFT JOIN creditcard cc on cc.IDCREDITCARD = b.IDCREDITCARD
@@ -53,10 +53,10 @@ class bills extends pageForm {
         $this->addTable('NMBILL', 'Bill');
         $this->addTable('NMCATEGORIE', 'Categorie');
         $this->addTable('VLBILL', 'value');
-        $this->addTable('FLPAID', 'Paid');
-        $this->addTable('FLINSTALLMENT', 'Installment');
+        $this->addTable('DSPAID', 'Paid');
+        $this->addTable('DSINSTALLMENT', 'Installment');
         $this->addTable('NRINSTALLMENT', 'Nr.installment');
-        $this->addTable('TPPAYMENT', 'Payment');
+        $this->addTable('DSPAYMENT', 'Payment');
         $this->addTable('NMCREDITCARD', 'Credit Card');
         $this->addTable('DSWHERESPENT', 'Where Spent');
         $this->addTable('DABILL', 'Bill date');
