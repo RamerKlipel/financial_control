@@ -3,15 +3,18 @@ namespace Core;
 use Core\database;
 use Exception;
 
+use Core\form\InputField;
+use Core\form\SelectField;
+
+
 trait form {
-    protected $viewFormContent;
     protected $arrInputs = [];
     public function setArrInputs(array $arrInputs): void
     {
         $this->arrInputs = $arrInputs;
     }
 
-    public function renderForm(): void
+    public function renderForm(): void //TODO passar para o pageForm
     {
         if (empty($this->getArrInputs())) {
             http_response_code(500);
@@ -34,7 +37,7 @@ trait form {
         return $this->arrInputs;
     }
 
-    public function Submit()
+    public function Submit() // TODO passar para o pageform
     {
         try {
             if ($this->post && !($this->get['complete'] ?? false)) {
@@ -81,14 +84,8 @@ trait form {
         if ($this->action == "r") {
             $arrAttrInput['disabled'] = true;
         }
-        $this->arrInputs[] = [
-            'typeInput' => 'input',
-            'type' => $type,
-            'idInput' => $idInput,
-            'label' => $label,
-            'arrAttrInput' => $arrAttrInput,
-            'arrAttrDiv' => $arrAttrDiv,
-        ];
+
+        $this->arrInputs[] = new InputField($type, $idInput, $label, $arrAttrInput, $arrAttrDiv);
     }
 
     protected function addSelect(string $idInput, string $label = '', array $arrSelectOptions = [], array $arrAttrInput = [], array $arrAttrDiv = []): void
@@ -96,17 +93,11 @@ trait form {
         if ($this->action == "r") {
             $arrAttrInput['disabled'] = true;
         }
-        $this->arrInputs[] = [
-            'typeInput' => 'select',
-            'idInput' => $idInput,
-            'label' => $label,
-            'arrSelectOptions' => $arrSelectOptions,
-            'arrAttrInput' => $arrAttrInput,
-            'arrAttrDiv' => $arrAttrDiv,
-        ];
+
+        $this->arrInputs[] = new SelectField($idInput, $label, $arrSelectOptions, $arrAttrInput, $arrAttrDiv);
     }
 
-    public function getWidth($nr = 0): string
+    public function getWidth($nr = 0): string //TODO passar para a classe html
     {
         return "col-$nr";
     }
@@ -118,7 +109,11 @@ trait form {
             switch ($prefix) {
                 case 'DA':
                     if (preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $value)) {
-                        $this->post[$nmCampo] = formatDateDB($value);
+                        if (strlen($value) > 10) {
+                            $this->post[$nmCampo] = formatDateHourDB($value);
+                        } else {
+                            $this->post[$nmCampo] = formatDateDB($value);
+                        }
                     }
                     break;
                 case 'VL':

@@ -2,6 +2,6 @@
 namespace Core;
 abstract class migration
 {
-    public function up(){}
-    public function down(){}
+    abstract public function up(): string;
+    abstract public function down(): string;
 }
