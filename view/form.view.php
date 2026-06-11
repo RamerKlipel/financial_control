@@ -1,29 +1,13 @@
 <?php
-use Core\html;
+
 $arrInputs = $this->getArrInputs();
 $arrData = !empty($this->getArrData()) ? $this->getArrData()[0] : [];
 ?>
-<form action="<?= $this->server["REDIRECT_URL"]?>" data-action="<?= $this->action ?>" data-id="<?= $this->id ?>" method="post">
+<form action="<?= $this->server["REDIRECT_URL"] ?>" data-action="<?= $this->action ?>" data-id="<?= $this->id ?>" method="post">
     <div class="form-row form-input">
         <?php if (!empty($arrInputs)): ?>
-            <?php foreach($arrInputs as $input): ?>
-                <?php
-                $inputVal = '';
-                extract($input);
-
-                if (key_exists($idInput, $arrData)) {
-                    $inputVal = $arrData[$idInput];
-                }
-
-                switch($typeInput){
-                    case 'input':
-                        echo html::addInput($type, $idInput, $label, $arrAttrInput, $arrAttrDiv, $inputVal);
-                    break;
-                    case 'select':
-                        echo html::addSelect($idInput, $label, $arrSelectOptions, $arrAttrInput, $arrAttrDiv, $inputVal);
-                    break;
-                }
-                ?>
+            <?php foreach ($arrInputs as $input): ?>
+                <?= $input->render($arrData); ?>
 
             <?php endforeach; ?>
         <?php endif; ?>

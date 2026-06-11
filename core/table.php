@@ -33,7 +33,7 @@ trait table{
         return $this->arrTh;
     }
 
-    public function renderTable(): void
+    public function renderTable(): void //TODO passar para pageForm
     {
         // if (empty($this->getArrTable())) {
         //     http_response_code(500);

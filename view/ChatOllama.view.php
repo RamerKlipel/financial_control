@@ -45,11 +45,6 @@ use Core\html;
                             <button id="idSubmitMessage" type="button" class="btn btn-primary btn-send"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
                         </form>
                     </section>
-
-                    <div class="chat-card-note bottom-note">
-                        <h3>Como usar</h3>
-                        <p>Digite uma pergunta, comentário ou palavra-chave e envie. O assistente traz respostas com foco em clareza e ação.</p>
-                    </div>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ use Core\core;
 use Core\table;
 use Core\form;
 
-abstract class pageForm extends core{
+abstract class pageForm extends core {
     use table;
     use form;
 
@@ -16,7 +16,6 @@ abstract class pageForm extends core{
     public function __construct(string $nmPage, string $sqlTable)
     {
         parent::__construct($sqlTable);
-        // $this->catchFunction();
         $this->setNmPage($nmPage);
         $this->Form();
         $this->Table();
@@ -64,17 +63,6 @@ abstract class pageForm extends core{
     public function setFieldsSubmit(array $fieldsSubmit):void
     {
         $this->fieldsSubmit[] = $fieldsSubmit;
-    }
-
-    public function catchFunction()
-    {
-        $arrUrl = $this->handleUrl($this->get['url']);
-        if (!empty($arrUrl["METHOD"] ?? [])) {
-            $method = $arrUrl["METHOD"];
-            if (method_exists($this, $method)){
-                call_user_func([$this, $method]);
-            }
-        }
     }
 
     public function render(): void

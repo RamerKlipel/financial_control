@@ -35,6 +35,7 @@ function formatDateDB($date): null|string
     if (empty($date)) {
         return null;
     }
+
     [$day, $month, $year] = explode('/', $date);
     $blValidDay = $day >= 0 && $day <= 31;
     $blValidMonth = $month >= 1 && $month <= 12;
@@ -98,5 +99,18 @@ function formatDateHourUser(string $dateHour): null|string
     $hour = substr($dateHour, 11);
 
     $dateFormated = formatDateUser($date);
+    return "$dateFormated $hour";
+}
+
+function formatDateHourDB(string $dateHour): null|string
+{
+    if (empty($dateHour)) {
+        return null;
+    }
+
+    $date = substr($dateHour, 0, 10);
+    $hour = substr($dateHour, 11);
+
+    $dateFormated = formatDateDB($date);
     return "$dateFormated $hour";
 }

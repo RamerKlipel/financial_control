@@ -7,8 +7,8 @@ class html
 
 	public static function addInput(string $type, string $idInput, string $label = '', array $arrAttrInput = [], array $arrAttrDiv = [], mixed $inputVal = ''): string
 	{
-		if ($inputVal) {
-			$arrAttrInput['value'] = $inputVal;
+		if (!empty($inputVal)) {
+			$arrAttrInput['value'] = !is_array($inputVal) ? $inputVal : ($inputVal[$idInput] ?? "");
 		}
 
 		$strAttrInput = self::adjustAttr($arrAttrInput);
@@ -56,14 +56,18 @@ class html
 
 	public static function addSelect(string $idInput, string $label = '', array $arrSelectOptions = [], array $arrAttrInput = [], array $arrAttrDiv = [], mixed $inputVal = ''):string
 	{
+		if (!empty($inputVal)) {
+			$arrAttrInput['value'] = !is_array($inputVal) ? $inputVal : ($inputVal[$idInput] ?? "");
+		}
+
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 		$strAttrDiv = self::adjustAttr($arrAttrDiv);
-		$strSelectOptions = self::handleSelectOptions($arrSelectOptions, $arrAttrInput, $inputVal);
+		$strSelectOptions = self::handleSelectOptions($arrSelectOptions, $arrAttrInput, $arrAttrInput['value']);
 		$label = self::handleRequiredLabel($label, $arrAttrInput);
 
 		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
 		$label = "<label for=".$idInput.">$label</label>";
-		$select = "<select name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput value='$inputVal'>$strSelectOptions</select>";
+		$select = "<select name=\"".$idInput."\" id=\"".$idInput."\" $strAttrInput >$strSelectOptions</select>";
 		$divSelect = $abreDiv.$label.$select."</div>";
 		return $divSelect;
 	}
