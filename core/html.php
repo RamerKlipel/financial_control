@@ -62,7 +62,7 @@ class html
 
 		$strAttrInput = self::adjustAttr($arrAttrInput);
 		$strAttrDiv = self::adjustAttr($arrAttrDiv);
-		$strSelectOptions = self::handleSelectOptions($arrSelectOptions, $arrAttrInput, $arrAttrInput['value']);
+		$strSelectOptions = self::handleSelectOptions($arrSelectOptions, $arrAttrInput, ($arrAttrInput['value'] ?? ""));
 		$label = self::handleRequiredLabel($label, $arrAttrInput);
 
 		$abreDiv = "<div id='div$idInput' $strAttrDiv>";
@@ -74,14 +74,15 @@ class html
 
 	private static function handleSelectOptions(array $arrSelectOptions, array $arrAttrInput, mixed $inputVal): string
 	{
+		$arrOptions = [];
 		foreach($arrSelectOptions as $value => $label) {
 			$selected = $value == $inputVal ? 'selected' : '';
 
-			$strOptions[] = "<option $selected value=".$value.">".$label."</option>";
+			$arrOptions[] = "<option $selected value=".$value.">".$label."</option>";
 		}
 
-		self::addSelectOption($strOptions, $arrAttrInput);
-		return implode('', $strOptions);
+		self::addSelectOption($arrOptions, $arrAttrInput);
+		return implode('', $arrOptions);
 	}
 
 	private static function addSelectOption(array &$arrSelectOptions, array $arrAttrInput): void
