@@ -16,7 +16,7 @@ class ErrorHandler {
 
     public static function handlerException(\Throwable $e)
     {
-        $code = $e->getCode() ?? 500;
+        $code = (int)$e->getCode() ?? 500;
         http_response_code($code);
         if (ob_get_length()) {
             ob_clean();
@@ -56,7 +56,7 @@ class ErrorHandler {
                 'message' => $error['message'],
                 'file' => $error['file'],
                 'line' => $error['line'],
-                'trace' => $error['trace'],
+                'trace' => $error['trace'] ?? "make some tests before changing something forever",
             ];
 
             require_once __DIR__. "/../view/error.view.php";
