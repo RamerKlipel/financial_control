@@ -38,12 +38,12 @@ new class OllamaChat {
 
             if (value == "[DATA]") {
                 response.close();
-                elmtDomHistoryMessages.innerHTML = marked.parse(resposta);
+                elmtDomHistoryMessages.outerHTML = marked.parse(resposta);
                 this._scrollToSmoothBottom(elmtHistoryMessages);
                 return;
             }
             resposta += JSON.parse(value);
-            elmtDomHistoryMessages.innerHTML = marked.parse(resposta);
+            elmtDomHistoryMessages.outerHTML = marked.parse(resposta);
 
             this._scrollToSmoothBottom(elmtHistoryMessages);
         }
