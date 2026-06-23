@@ -1,4 +1,4 @@
-<base href="/controle_financeiro/">
+<base href="/financial_control/">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="index">Financial Control</a>

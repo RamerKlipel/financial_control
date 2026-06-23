@@ -107,7 +107,7 @@ body {
     margin: 10px 0 0 10px;
 }
 
-.message.ai > p:empty::after {
+.message.ai > .message-ai:empty::after {
     content: '.';
     animation: dots 1s infinite steps(4);
 }
