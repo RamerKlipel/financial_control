@@ -30,7 +30,7 @@ new class OllamaChat {
     askChatOllama(elmtHistoryMessages) {
         const url = helper.getUrlFecth('askChatOllama');
         const response = new EventSource(url);
-        const elmtDomHistoryMessages = document.querySelector('.message.ai:last-child p');
+        let elmtDomHistoryMessages = document.querySelector('.message.ai:last-child .message-ai');
         let resposta = "";
 
         response.onmessage = (e) => {
@@ -38,12 +38,13 @@ new class OllamaChat {
 
             if (value == "[DATA]") {
                 response.close();
-                elmtDomHistoryMessages.outerHTML = marked.parse(resposta);
+                elmtDomHistoryMessages.innerHTML = marked.parse(resposta);
                 this._scrollToSmoothBottom(elmtHistoryMessages);
                 return;
             }
+
             resposta += JSON.parse(value);
-            elmtDomHistoryMessages.outerHTML = marked.parse(resposta);
+            elmtDomHistoryMessages.innerHTML = marked.parse(resposta);
 
             this._scrollToSmoothBottom(elmtHistoryMessages);
         }
@@ -68,7 +69,7 @@ new class OllamaChat {
         const elmtMessageAi = `
             <article class="message ai">
                 <div class="meta"><span class="dot"></span> <strong>Olla IA</strong></div>
-                <p></p>
+                <div class="message-ai"></div>
             </article>
         `;
 
@@ -101,7 +102,7 @@ new class OllamaChat {
         await fetch(urlSetMessage, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({'prompt': prompt}),
+            body: JSON.stringify({ 'prompt': prompt }),
         });
 
     }
