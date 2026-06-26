@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Core\pageForm;
+use Core\core;
 
 class bills extends pageForm {
 

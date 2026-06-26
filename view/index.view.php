@@ -11,7 +11,7 @@ $arrPermCRUD = $this->getArrPermCrud();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="./public/css/style.css" >
-    <link rel="icon" href="data:,">
+    <link rel="icon" href="data:,">//TODO esses botoes aide novo registor e voltar tão quebrando com o filter
     <?php foreach ($this->getArrCss() as $css): ?>
             <link rel="stylesheet" href="./public/css/<?= $css ?>.css" >
     <?php endforeach; ?>
@@ -23,7 +23,8 @@ $arrPermCRUD = $this->getArrPermCrud();
     <div class="inline-primary-div">
         <div class="inline-card-div box-shadow" >
             <div class="inline-title">
-                <h3><?= $this->getNmPage() ?></h3>
+                <h3><?= $this->getNmPage() //TODO maybe make this buttons in an array could resolve the problem on filter with this buttons
+                 ?></h3>
             <?php if (($arrPermCRUD['c'] ?? false) && empty($this->action)): ?>
                 <a href="<?= $this->server["REDIRECT_URL"]?>?action=c" class="btn btn-primary" style="margin: 10px 0;" type="button" name="btnCreate" title="Create" id="btnCreate">new registration</a>
             <?php endif; ?>
