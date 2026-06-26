@@ -44,7 +44,6 @@ new class OllamaChat {
             }
             resposta += JSON.parse(value);
             elmtDomHistoryMessages.outerHTML = marked.parse(resposta);
-            console.log(resposta);
 
             this._scrollToSmoothBottom(elmtHistoryMessages);
         }
